@@ -91,7 +91,7 @@ public class Student extends User implements CanBeResearcher {
 
 
     public void rateTeacher() {
-        // TODO: Implement the logic to rate a teacher
+        // приходите позже, я еще не андерстенд как реализовать
     }
 
 
@@ -103,7 +103,7 @@ public class Student extends User implements CanBeResearcher {
 
 
     public void registerForCourses() {
-        // TODO: Implement the logic to register for courses
+    	// приходите позже, я еще не андерстенд как реализовать
     }
 
     public Transcript getTranscript() {
@@ -111,10 +111,15 @@ public class Student extends User implements CanBeResearcher {
         return null;
     }
 
-    public Map<Teacher, Course> viewTeachers() {
-        Map<Teacher, Course> teacherCourseMap = new HashMap<>();
-        // TODO: Implement the logic to populate the Map with teachers and their corresponding courses
-        return teacherCourseMap;
+    public void viewTeachers() {
+        if (courses != null && !courses.isEmpty()) {
+            for (Courses cource : courses) {
+            	//там с объектом тичера надо крч разобраться
+                System.out.println("Course: " + cource.getCoursesName() + ", Teacher: " + "teacher.getName()");
+            }
+        } else {
+            System.out.println("No lessons available.");
+        }
     }
 
     @Override
@@ -135,8 +140,7 @@ public class Student extends User implements CanBeResearcher {
                 && this.courses.equals(student.courses);
     }
 
-    @Override
     public void makeResearch() {
-        // TODO: Implement logic for making research
+        System.out.println("Тут ченить будет потом, обещаю");
     }
 }
