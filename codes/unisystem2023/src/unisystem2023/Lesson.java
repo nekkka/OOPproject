@@ -1,40 +1,62 @@
 package unisystem2023;
 
+import java.util.Vector;
 
-class Lesson extends DataManager {
+
+class Lesson extends DataManager{
     private String lessonName;
-    private String courseName;
-
-    
+    private Courses courseName;
+    //private Map<DayWeek, Time> schedule;
+    private Vector<DayWeek> schedule;
+    private int auditorium; // мб экспепшн на номер кабов сделаем
     
     public Lesson() {
-		// TODO Auto-generated constructor stub
-	}
-    
-    public Lesson(String lessonName, String courseName) {
+        // Default constructor
+    }
+
+    public Lesson(String lessonName, Courses courseName) {
         this.lessonName = lessonName;
         this.courseName = courseName;
     }
-
-	public String getLessonName() {
-		return lessonName;
-	}
-
-	public void setLessonName(String lessonName) {
-		this.lessonName = lessonName;
-	}
-
-	public String getCourseName() {
-		return courseName;
-	}
-
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
-
-	public void addLessonToCourse(String courseName, String lessonName) {}
     
+    public Lesson(String lessonName, Courses courseName, Vector<DayWeek> schedule, int auditorium) {
+        this.lessonName = lessonName;
+        this.courseName = courseName;
+        this.schedule = schedule;
+        this.auditorium = auditorium;
+    }
 
-   
+    public String getLessonName() {
+        return lessonName;
+    }
+
+    public void setLessonName(String lessonName) {
+        this.lessonName = lessonName;
+    }
+
+    public Courses getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(Courses courseName) {
+        this.courseName = courseName;
+    }
+
+    public Vector<DayWeek> getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Vector<DayWeek> schedule) {
+        this.schedule = schedule;
+    }
+
+    public int getAuditorium() {
+        return auditorium;
+    }
+
+    public void setAuditorium(int auditorium) {
+        this.auditorium = auditorium;
+    }
+
+    
 }
-
