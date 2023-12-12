@@ -2,140 +2,141 @@ package unisystem2023;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-/**
-* @generated
-*/
-public class Student {
-	//implements InfoTeacher, CanBeResearcher
+public class Student extends User implements CanBeResearcher {
     private Faculty faculty;
     private int yearOfStudy;
-    private double gpa;
+    private double GPA;
     private OrganizationName member;
-    private ArrayList <Courses> courses;
+    private ArrayList<Courses> courses;
+    private HashMap<Courses, Mark> coursesAndMarks;
 
-    
+    public Student() {
+        super();
+    }
+
+    public Student(Long id, String login, String password, String name, String surname,
+                   String phoneNumber, String email, Faculty faculty, int yearOfStudy,
+                   double GPA, OrganizationName member, ArrayList<Courses> courses) {
+        super(id, login, password, name, surname, phoneNumber, email); 
+        this.faculty = faculty;
+        this.yearOfStudy = yearOfStudy;
+        this.GPA = GPA;
+        this.member = member;
+        this.courses = courses;
+    }
+
+    // Геттеры и сеттеры 
+
     public Faculty getFaculty() {
         return this.faculty;
     }
 
-
-    public Faculty setFaculty(Faculty faculty) {
+    public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
     }
-    
-    
+
     public int getYearOfStudy() {
         return this.yearOfStudy;
     }
 
-
-    public int setYearOfStudy(Integer yearOfStudy) {
+    public void setYearOfStudy(int yearOfStudy) {
         this.yearOfStudy = yearOfStudy;
     }
-    
 
-    private double getGpa() {
-        return this.gpa;
+    public double getGPA() {
+        return this.GPA;
     }
-    
-    private double setGpa(Double gpa) {
-        this.gpa = gpa;
-    }
-    
 
-    private OrganizationName getMember() {
+    public void setGPA(double GPA) {
+        this.GPA = GPA;
+    }
+
+    public OrganizationName getMember() {
         return this.member;
     }
 
-    private OrganizationName setMember(OrganizationName member) {
+    public void setMember(OrganizationName member) {
         this.member = member;
     }
-    
 
-    public ArrayList <Courses> getCourses() {
+    public ArrayList<Courses> getCourses() {
         return this.courses;
     }
 
-    public ArrayList <Courses> setCourses(ArrayList <Courses> courses) {
+    public void setCourses(ArrayList<Courses> courses) {
         this.courses = courses;
     }
     
-
-
-    //                          Operations                                  
-    
-    public void viewMarks() {
-        //TODO
-        return null;
+    public HashMap<Courses, Mark> getCoursesAndMarks() {
+        return coursesAndMarks;
     }
     
+
+
+    public void viewAllMarks() {
+        Map<Courses, Mark> coursesAndMarks = getCoursesAndMarks();
+
+        if (coursesAndMarks.isEmpty()) {
+            for (Map.Entry<Courses, Mark> entry : coursesAndMarks.entrySet()) {
+                Courses course = entry.getKey();
+                Mark mark = entry.getValue();
+                System.out.println("Course: " + course.getCoursesName() + ", Mark: " + mark.getMark());
+            }
+        } else {
+            System.out.println("No marks available");
+        }
+    }
+
+
     public void rateTeacher() {
-        //TODO
-        return null;
-    }
-    
-
-   /* public double getMarks() {
-        //TODO
-        return 0.0;
-    }*/
-    
-    public int getYearOfStudy() {
-        //TODO
-        return 0;
-    }
-    
-    
-    public double getGPA() {
-        //TODO
-        return 0.0;
+        // TODO: Implement the logic to rate a teacher
     }
 
-    
-   
+
     public void viewCourses() {
-        //TODO
-        return null;
-    }
-    
-    public HashMap<Course, Mark> getCoursesAndMarks() {
-        //TODO
-        return null;
+        for (Courses course : courses) {
+            System.out.println(course);
+        }
     }
 
 
     public void registerForCourses() {
-        //TODO
-        return null;
+        // TODO: Implement the logic to register for courses
     }
-    
 
     public Transcript getTranscript() {
-        //TODO
+        // TODO: Implement the logic to get a transcript
         return null;
     }
 
-    public Map <OrganizationName, String> viewOrganization() {
-        //TODO
-        return null;
-    }
-    
-    
-    public Map <OrganizationName, String> joinOrganization() {
-        //TODO
-        return null;
+    public Map<Teacher, Course> viewTeachers() {
+        Map<Teacher, Course> teacherCourseMap = new HashMap<>();
+        // TODO: Implement the logic to populate the Map with teachers and their corresponding courses
+        return teacherCourseMap;
     }
 
-    public Map <Teacher, Course> viewTeachers() {
-        //TODO
-        return null;
+    @Override
+    public boolean equals(Object obj) {
+        // TODO: Implement proper equals method comparing Student objects
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Student student = (Student) obj;
+        // Add comparison logic based on the fields of Student class
+        return this.faculty.equals(student.faculty)
+                && this.yearOfStudy == student.yearOfStudy
+                && Double.compare(this.GPA, student.GPA) == 0
+                && this.member.equals(student.member)
+                && this.courses.equals(student.courses);
     }
-    
-    public boolean equals() {
-        //TODO
-        return false;
+
+    @Override
+    public void makeResearch() {
+        // TODO: Implement logic for making research
     }
-    
-    
 }
