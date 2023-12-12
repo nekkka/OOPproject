@@ -68,21 +68,24 @@ public class Teacher extends Employee {
     }
 
     public void putMarks(Courses course, Student student, double mark) {
-        // чекаем, существует ли курс такой у учителя
+        // чекаем учитель препоет ли вазе этот курс
         if (coursesAndStudents.containsKey(course)) {
             Vector<Student> students = coursesAndStudents.get(course);
             
-            // чекаем, записан ли студент на курс вообще
+            // Проверяем, записан ли студент на курс
             if (students.contains(student)) {
-                // Проверяем, существует ли карта оценок студента
+                // Проверяем, существует ли карта оценок студента для этого курса
                 if (!student.getCoursesAndMarks().containsKey(course)) {
-                    student.getCoursesAndMarks().put(course, new Mark());
+                    // Создаем объект Mark и устанавливаем оценку для студента на этом курсе
+                    Mark studentMark = new Mark(course.getId(), course, mark);
+                    student.getCoursesAndMarks().put(course, studentMark);
+                    System.out.println("Mark " + mark + " added for student " + student.getName() + " on course " + course.getCoursesName());
+                } else {
+                    // Обновляем оценку для студента на этом курсе
+                    Mark studentMark = student.getCoursesAndMarks().get(course);
+                    studentMark.setMark(mark);
+                    System.out.println("Mark " + mark + " updated for student " + student.getName() + " on course " + course.getCoursesName());
                 }
-                
-                // Устанавливаем оценку для студента на этом курсе
-                Mark studentMark = student.getCoursesAndMarks().get(course);
-                studentMark.setMark(mark);
-                System.out.println("Mark " + mark + " added for student " + student.getName() + " on course " + course.getCoursesName());
             } else {
                 System.out.println("Student not enrolled in the course.");
             }
@@ -90,6 +93,7 @@ public class Teacher extends Employee {
             System.out.println("Course not found.");
         }
     }
+
 
 
 
