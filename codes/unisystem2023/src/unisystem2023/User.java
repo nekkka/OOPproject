@@ -118,7 +118,7 @@ public abstract class User implements Comparable <User> {
         //this.role = null;
     }
     public String toString() {
-		return name + "'s data. Login: " + login + " id: " + id + ")";
+		return name + "'s data: Login: " + login + ", id: " + id + ")";
 	}
     
     public int compareTo(User u) {

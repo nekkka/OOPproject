@@ -3,12 +3,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+//синглтон
+public class DataManager  {
+    protected Map<String, Vector<String>> courseLessonsMap =  new HashMap<>();;
 
-public class DataManager {
-    protected Map<String, Vector<String>> courseLessonsMap;
-
-    public DataManager() {
-        courseLessonsMap = new HashMap<>();
+    private DataManager() {
+        
     }
 
     public void addLessonToCourse(String courseName, String lesson) {
@@ -37,10 +37,6 @@ public class DataManager {
         return courseLessonsMap.keySet();
     }
 
-	@Override
-	public String toString() {
-		return "DataManager [courseLessonsMap=" + courseLessonsMap + "]"; 
-	}
 
   
 }

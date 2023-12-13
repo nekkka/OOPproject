@@ -35,7 +35,9 @@ public abstract class Employee extends User {
         this.salary = salary;
     }
 
-    public String toString() {
-        return "I am an Employee";
+    
+    
+    public String getName() {
+        return super.getName();
     }
 }

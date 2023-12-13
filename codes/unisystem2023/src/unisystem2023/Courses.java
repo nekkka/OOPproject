@@ -1,5 +1,8 @@
 package unisystem2023;
 
+import java.util.ArrayList;
+import java.util.Vector;
+
 public class Courses extends DataManager {
 	private String courseName;
 	private String id;
@@ -9,6 +12,7 @@ public class Courses extends DataManager {
 	private Teacher lector = new Teacher();
 	private Teacher practice = new Teacher();
 	private Faculty faculty;
+
 	
 	
 	public Courses() {
@@ -97,18 +101,19 @@ public class Courses extends DataManager {
 	    public void setFaculty(Faculty faculty) {
 	        this.faculty = faculty;
 	    }
+	    
 	
 	
 	//Ниже нада разобраца
-	/*public Vector<String> getLessonsForCourse(String coursesName) {
+	public Vector<String> getLessonsForCourse(String coursesName) {
 		return  courseLessonsMap.getOrDefault(coursesName, new Vector<>());
-		}*/
-	
+		}
+	    
 
 	
 	public String toString() {
 		return "Course's name: " + courseName + ", credits: " + credits
-				+ ", ID code: " + id + ' ' + lector + ' ' + practice;
+				+ ", ID code: " + id + ' '; // + lector + ' ' + practice
 	}
 	
 	

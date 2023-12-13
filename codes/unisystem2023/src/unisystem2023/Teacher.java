@@ -21,6 +21,9 @@ public class Teacher extends Employee {
         this.academicDegree = academicDegree;
         this.coursesAndStudents = coursesMap;
     }
+    public String getName() {
+        return super.getName();
+    }
 
     public Faculty getFaculty() {
         return faculty;
@@ -68,7 +71,7 @@ public class Teacher extends Employee {
     }
 
     public void putMarks(Courses course, Student student, double mark) {
-        // чекаем учитель препоет ли вазе этот курс
+        // чекаем учитель препоет ли ваще этот курс
         if (coursesAndStudents.containsKey(course)) {
             Vector<Student> students = coursesAndStudents.get(course);
             
@@ -93,8 +96,6 @@ public class Teacher extends Employee {
             System.out.println("Course not found.");
         }
     }
-
-
 
 
     public void sendComplaint(Student student, String complaint) {

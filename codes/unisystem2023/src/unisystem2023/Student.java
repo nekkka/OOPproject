@@ -113,14 +113,19 @@ public class Student extends User implements CanBeResearcher {
 
     public void viewTeachers() {
         if (courses != null && !courses.isEmpty()) {
-            for (Courses cource : courses) {
-            	//там с объектом тичера надо крч разобраться
-                System.out.println("Course: " + cource.getCoursesName() + ", Teacher: " + "teacher.getName()");
+            for (Courses course : courses) {
+                Teacher lector = course.getLector();
+                if (lector != null) {
+                    System.out.println("Course: " + course.getCoursesName() + ", Lector: " + lector.getName());
+                } else {
+                    System.out.println("Course: " + course.getCoursesName() + ", Teacher: Not assigned");
+                }
             }
         } else {
             System.out.println("No lessons available.");
         }
     }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -143,4 +148,6 @@ public class Student extends User implements CanBeResearcher {
     public void makeResearch() {
         System.out.println("Тут ченить будет потом, обещаю");
     }
+    
+    
 }

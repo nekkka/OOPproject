@@ -1,21 +1,21 @@
 package unisystem2023;
 
 public class Mark {
-    private Integer courseId;
+    private String courseId;
     private Courses courseName;
     private Double numericDouble;
 
-    public Mark(Integer courseId, Courses courseName, Double numericDouble) {
+    public Mark(String courseId, Courses courseName, Double numericDouble) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.numericDouble = numericDouble;
     }
 
-    public Integer getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Integer courseId) {
+    public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
 
