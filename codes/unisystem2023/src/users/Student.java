@@ -112,11 +112,41 @@ public class Student extends User implements CanBeResearcher, Serializable {
     }
 
 
-    public boolean addCourse(Courses c){
+   /* public boolean addCourse(Courses c){
         // Check prerequisites, credits, faculty
         // Add the course with a default mark
         courses.put(c, new Mark());
         return true;
+    }*/
+    
+    public boolean register(Courses course) {
+        // Check if the student is eligible to register for the course based on prerequisites, credits, etc.
+        // You need to implement the logic based on your application's requirements
+
+        // For demonstration purposes, let's assume the student can register for any course without restrictions
+        if (course != null) {
+            // Check if the course is not already registered
+            if (!courses.containsKey(course)) {
+                // Add the course with a default mark
+                courses.put(course, new Mark());
+                return true; // Successfully registered
+            } else {
+                // Student is already registered for this course
+                System.out.println("Already registered for this course: " + course.getCoursesName());
+                return false; // Failed to register
+            }
+        } else {
+            // Invalid course
+            System.out.println("Invalid course");
+            return false; // Failed to register
+        }
+    }
+
+    
+    public void dropCourse(Courses course) {
+        // Implementation of dropCourse method
+        // Drop the specified course from the student's registered courses
+        // You need to add appropriate logic to remove the course from the student's registered courses
     }
     
 
@@ -140,8 +170,6 @@ public class Student extends User implements CanBeResearcher, Serializable {
             System.out.println("No lessons available.");
         }
     }
-
-
 
     @Override
     public boolean equals(Object obj) {

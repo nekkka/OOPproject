@@ -3,7 +3,7 @@ package users;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class User implements Comparable <User>, Serializable {
+public abstract class User implements Serializable {
     private Long id;
     private String login;
     private String password;
@@ -17,6 +17,11 @@ public abstract class User implements Comparable <User>, Serializable {
     public User() {
     }
     
+    public User(String login, String password) {
+    	this.login = login;
+        this.password = password;
+	}
+    
     public User (Long id, String login, String password, String name, String surname, String phoneNumber, String email) {
         this.id = id;
         this.login = login;
@@ -29,7 +34,8 @@ public abstract class User implements Comparable <User>, Serializable {
     }
        
     
-    public Long getId() {
+
+	public Long getId() {
         return id;
     }
 
