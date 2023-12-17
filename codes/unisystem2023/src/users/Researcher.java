@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.lang.Comparable;
 import java.util.Vector;
 
-import unisystem2023.Data;
+import unisystem2023.Database;
 import unisystem2023.ResearchPaper;
 
 
@@ -14,7 +14,7 @@ public class Researcher implements Serializable, Comparable <Researcher>{
 	private Vector <ResearchPaper> researches = new Vector <ResearchPaper>();
 
 	{
-		Data.getInstance().addResearcher(this);
+		Database.getInstance().addResearcher(this);
 	}
 
 	protected Researcher(){}

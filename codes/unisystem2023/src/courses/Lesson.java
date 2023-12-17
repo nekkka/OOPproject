@@ -6,7 +6,7 @@ import enums.DayWeek;
 import unisystem2023.DataManager;
 
 
-class Lesson extends DataManager{
+class Lesson{
     private String lessonName;
     private Courses courseName;
     //private Map<DayWeek, Time> schedule;

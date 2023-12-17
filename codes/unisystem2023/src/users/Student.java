@@ -206,14 +206,14 @@ public class Student extends User implements CanBeResearcher, Serializable {
 		return result;
 	}
 
-    @Override
-    public int compareTo(User o) {
+   // @Override
+    /*public int compareTo(User o) {
         if (o instanceof Student) {
             Student otherStudent = (Student) o;
             return Long.compare(this.getId(), otherStudent.getId());
         }
         return 0;
-    }
+    }*/
 
     
     

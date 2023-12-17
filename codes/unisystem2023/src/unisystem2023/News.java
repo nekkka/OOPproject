@@ -9,7 +9,7 @@ public class News implements Serializable{
 	private String theme;
 
 	{
-		Data.getInstance().addNews(this);
+		Database.getInstance().addNews(this);
 	}
 	
 	public News(){

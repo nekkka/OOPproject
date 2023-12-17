@@ -3,11 +3,12 @@ package users;
 import java.util.List;
 
 import unisystem2023.CanBeResearcher;
+import unisystem2023.ResearchPaper;
 
 public class PhDStudent extends Student implements CanBeResearcher {
     
     private Researcher researchSupervisor;
-    private List<ResearchPapers> works;
+    private List<ResearchPaper> works;
 
     public Researcher getResearchSupervisor() {
         return this.researchSupervisor;
@@ -17,11 +18,11 @@ public class PhDStudent extends Student implements CanBeResearcher {
         this.researchSupervisor = researchSupervisor;
     }
     
-    public List<ResearchPapers> getWorks() {
+    public List<ResearchPaper> getWorks() {
         return this.works;
     }
 
-    public void setWorks(List<ResearchPapers> works) {
+    public void setWorks(List<ResearchPaper> works) {
         this.works = works;
     }
 
