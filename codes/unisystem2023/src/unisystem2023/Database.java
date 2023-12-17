@@ -90,6 +90,9 @@ public class Database implements Serializable {
     public Vector<Researcher> getResearchers() {
         return researchers;
     }
+    public void addResearcher(Researcher researcher) {
+        researchers.add(researcher);
+    }
 
     // Setter methods
     public void setUsers(Vector<User> users) {

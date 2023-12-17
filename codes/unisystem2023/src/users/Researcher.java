@@ -14,7 +14,7 @@ public class Researcher implements Serializable, Comparable<Researcher> {
     private Integer hIndex;
 
     {
-        Database.getInstance().addResearcher(this);
+        Database.getInstance().setResearchers(this);
     }
 
     public Researcher() {

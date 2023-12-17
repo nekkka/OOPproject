@@ -16,6 +16,7 @@ public abstract class Employee extends User {
         super(id, login, password, name, surname, phoneNumber, email);
         this.salary = salary;
     }
+    
 
     public void addMessage(Message message) {
         messages.add(message);

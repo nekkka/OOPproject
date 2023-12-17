@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import enums.Semester;
 
 public class Transcript implements Serializable {
-    private ArrayList<Double> allGPA;
+    private ArrayList<Marks> allGPA;
     private Semester semester;
     private ArrayList<String> allLetterGrades;
     private Double attestationOne;
@@ -73,11 +73,11 @@ public class Transcript implements Serializable {
 
     // Метод для вычисления общего GPA
     private double calculateGPA() {
-        double total = 0;
-        for (Mark mark : allGPA) {
-            total += mark.getMark();
+        if (attestationOne != null && attestationTwo != null && finalExamMark != null) {
+            return (attestationOne + attestationTwo + finalExamMark) / 3.0;
+        } else {
+            return 0.0;
         }
-        return total / allGPA.size();
     }
 
 
