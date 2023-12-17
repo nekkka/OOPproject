@@ -1,41 +1,74 @@
 package unisystem2023;
 
-public class Mark {
-    private String courseId;
-    private Courses courseName;
-    private Double numericDouble;
+import java.io.Serializable;
 
-    public Mark(String courseId, Courses courseName, Double numericDouble) {
-        this.courseId = courseId;
-        this.courseName = courseName;
-        this.numericDouble = numericDouble;
+public class Mark implements Serializable {
+	private double att1;
+	private double att2;
+	private double finalExam;
+	
+	public Mark() {
+		
+	}
+	
+    // Getters and setters
+
+    public double getAtt1() {
+        return att1;
     }
 
-    public String getCourseId() {
-        return courseId;
+    public void setAtt1(double att1) {
+        this.att1 = att1;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    public double getAtt2() {
+        return att2;
     }
 
-    public Courses getCourseName() {
-        return courseName;
+    public void setAtt2(double att2) {
+        this.att2 = att2;
     }
 
-    public void setCourseName(Courses courseName) {
-        this.courseName = courseName;
+    public double getFinalExam() {
+        return finalExam;
     }
 
-    public Double getMark() {
-        return numericDouble;
+    public void setFinalExam(double finalExam) {
+        this.finalExam = finalExam;
     }
-
-    public void setMark(Double numericDouble) {
-        this.numericDouble = numericDouble;
-    }
-
-    public void showMarkList() {
-        // в разработке
-    }
+    
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(att1);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(att2);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(finalExam);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Mark other = (Mark) obj;
+		if (Double.doubleToLongBits(att1) != Double.doubleToLongBits(other.att1))
+			return false;
+		if (Double.doubleToLongBits(att2) != Double.doubleToLongBits(other.att2))
+			return false;
+		if (Double.doubleToLongBits(finalExam) != Double.doubleToLongBits(other.finalExam))
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "Mark [att1=" + att1 + ", att2=" + att2 + ", finalExam=" + finalExam + "]";
+	}
 }

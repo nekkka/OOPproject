@@ -1,121 +1,112 @@
 package unisystem2023;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Courses extends DataManager {
-	private String courseName;
-	private String id;
-	private int credits;
-	private CoursesType courseType;
-	private Semester semester;
-	private Teacher lector = new Teacher();
-	private Teacher practice = new Teacher();
-	private Faculty faculty;
+public class Courses implements Serializable {
+    private String courseName;
+    private String id;
+    private int credits;
+    private CoursesType courseType;
+    private Semester semester;
+    private String prerequisites;
+    private Teacher lector = new Teacher();
+    private Teacher practice = new Teacher();
+    private Faculty faculty;
 
-	
-	
-	public Courses() {
-		
-	}
-	
-	public Courses(String coursesName,String id,int credits) {
-		this.courseName = coursesName;
-		this.id = id;
-		this.credits = credits;
-		
-	}
-	
+    public Courses() {
+    }
+
+    public Courses(String coursesName, String id, int credits) {
+        this.courseName = coursesName;
+        this.id = id;
+        this.credits = credits;
+    }
+
     public Courses(String courseName, String id, int credits, CoursesType courseType,
-            Semester semester, Teacher lector, Teacher practice, Faculty faculty) {
-		 this.courseName = courseName;
-		 this.id = id;
-		 this.credits = credits;
-		 this.courseType = courseType;
-		 this.semester = semester;
-		 this.lector = lector;
-		 this.practice = practice;
-		 this.faculty = faculty;
-}
+                   Semester semester, Teacher lector, Teacher practice, Faculty faculty) {
+        this.courseName = courseName;
+        this.id = id;
+        this.credits = credits;
+        this.courseType = courseType;
+        this.semester = semester;
+        this.lector = lector;
+        this.practice = practice;
+        this.faculty = faculty;
+    }
 
-	public String getCoursesName() {
-		return courseName;
-	}
+    // Getters and setters
 
-	public void setCoursesName(String coursesName) {
-		this.courseName = coursesName;
-	} 
+    public String getCoursesName() {
+        return courseName;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public void setCoursesName(String coursesName) {
+        this.courseName = coursesName;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public int getCredits() {
-		return credits;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public void setCredits(int credits) {
-		this.credits = credits;
-	}
-	
-	public CoursesType getCourseType() {
-		return courseType;
-	}
+    public int getCredits() {
+        return credits;
+    }
 
-	public void setCourseType(CoursesType courseType) {
-		this.courseType = courseType;
-	}
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
 
-	public Semester getSemester() {
-		return semester;
-	}
+    public CoursesType getCourseType() {
+        return courseType;
+    }
 
-	public void setSemester(Semester semester) {
-		this.semester = semester;
-	}
+    public void setCourseType(CoursesType courseType) {
+        this.courseType = courseType;
+    }
 
-	    public Teacher getLector() {
-	        return lector;
-	    }
+    public Semester getSemester() {
+        return semester;
+    }
 
-	    public void setLector(Teacher t){
-			lector = t;
-		}
+    public void setSemester(Semester semester) {
+        this.semester = semester;
+    }
 
-	    public Teacher getPracticeTeacher() {
-	        return practice;
-	    }
+    public Teacher getLector() {
+        return lector;
+    }
 
-		public void setPracticeTeacher(Teacher t){
-			practice = t;
-		}
+    public void setLector(Teacher lector) {
+        this.lector = lector;
+    }
 
-	    public Faculty getFaculty() {
-	        return faculty;
-	    }
+    public Teacher getPracticeTeacher() {
+        return practice;
+    }
 
-	    public void setFaculty(Faculty faculty) {
-	        this.faculty = faculty;
-	    }
-	    
-	
-	
-	//Ниже нада разобраца
-	public Vector<String> getLessonsForCourse(String coursesName) {
-		return  courseLessonsMap.getOrDefault(coursesName, new Vector<>());
-		}
-	    
+    public void setPracticeTeacher(Teacher practice) {
+        this.practice = practice;
+    }
 
-	
-	public String toString() {
-		return "Course's name: " + courseName + ", credits: " + credits
-				+ ", ID code: " + id + ' '; // + lector + ' ' + practice
-	}
-	
-	
+    public Faculty getFaculty() {
+        return faculty;
+    }
 
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
+    //надо чекнуть
+   /* public Vector<String> getLessonsForCourse(String coursesName) {
+        return courseLessonsMap.getOrDefault(coursesName, new Vector<>());
+    }*/
+
+    public String toString() {
+        return "Course's name: " + courseName + ", credits: " + credits + ", ID code: " + id + ' ';
+    }
 }

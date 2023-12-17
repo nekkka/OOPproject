@@ -1,24 +1,26 @@
 package unisystem2023;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Student extends User implements CanBeResearcher {
+public class Student extends User implements CanBeResearcher, Serializable {
     private Faculty faculty;
     private int yearOfStudy;
     private double GPA;
     private OrganizationName member;
-    private ArrayList<Courses> courses;
+    private HashMap<Courses,Mark> courses;
     private HashMap<Courses, Mark> coursesAndMarks;
 
     public Student() {
         super();
+        courses = new HashMap<>();
     }
 
     public Student(Long id, String login, String password, String name, String surname,
                    String phoneNumber, String email, Faculty faculty, int yearOfStudy,
-                   double GPA, OrganizationName member, ArrayList<Courses> courses) {
+                   double GPA, OrganizationName member, HashMap<Courses,Mark> courses) {
         super(id, login, password, name, surname, phoneNumber, email); 
         this.faculty = faculty;
         this.yearOfStudy = yearOfStudy;
@@ -61,11 +63,11 @@ public class Student extends User implements CanBeResearcher {
         this.member = member;
     }
 
-    public ArrayList<Courses> getCourses() {
+    public HashMap<Courses,Mark> getCourses() {
         return this.courses;
     }
 
-    public void setCourses(ArrayList<Courses> courses) {
+    public void setCourses(HashMap<Courses,Mark> courses) {
         this.courses = courses;
     }
     
@@ -82,7 +84,7 @@ public class Student extends User implements CanBeResearcher {
             for (Map.Entry<Courses, Mark> entry : coursesAndMarks.entrySet()) {
                 Courses course = entry.getKey();
                 Mark mark = entry.getValue();
-                System.out.println("Course: " + course.getCoursesName() + ", Mark: " + mark.getMark());
+                System.out.println("Course: " + course.getCoursesName() + ", Mark: " + mark.getAtt1()+mark.getAtt2()+mark.getFinalExam());
             }
         } else {
             System.out.println("No marks available");
@@ -96,15 +98,20 @@ public class Student extends User implements CanBeResearcher {
 
 
     public void viewCourses() {
-        for (Courses course : courses) {
+        for (Map.Entry<Courses, Mark> entry : courses.entrySet()) {
+            Courses course = entry.getKey();
             System.out.println(course);
         }
     }
 
 
-    public void registerForCourses() {
-    	// приходите позже, я еще не андерстенд как реализовать
+    public boolean addCourse(Courses c){
+        // Check prerequisites, credits, faculty
+        // Add the course with a default mark
+        courses.put(c, new Mark());
+        return true;
     }
+    
 
     public Transcript getTranscript() {
         // TODO: Implement the logic to get a transcript
@@ -113,7 +120,8 @@ public class Student extends User implements CanBeResearcher {
 
     public void viewTeachers() {
         if (courses != null && !courses.isEmpty()) {
-            for (Courses course : courses) {
+            for (Map.Entry<Courses, Mark> entry : courses.entrySet()) {
+                Courses course = entry.getKey();
                 Teacher lector = course.getLector();
                 if (lector != null) {
                     System.out.println("Course: " + course.getCoursesName() + ", Lector: " + lector.getName());
@@ -125,6 +133,7 @@ public class Student extends User implements CanBeResearcher {
             System.out.println("No lessons available.");
         }
     }
+
 
 
     @Override
@@ -148,6 +157,29 @@ public class Student extends User implements CanBeResearcher {
     public void makeResearch() {
         System.out.println("Тут ченить будет потом, обещаю");
     }
+    
+    public String toString(){
+		return getName()+ ", id is "+getId()+", registered courses:  "+(courses.size()==0?"No courses yet ":courses);
+	}
+    
+    public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((courses == null) ? 0 : courses.hashCode());
+		result = (int) (prime * result + getId());
+		result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+		return result;
+	}
+
+    @Override
+    public int compareTo(User o) {
+        if (o instanceof Student) {
+            Student otherStudent = (Student) o;
+            return Long.compare(this.getId(), otherStudent.getId());
+        }
+        return 0;
+    }
+
     
     
 }

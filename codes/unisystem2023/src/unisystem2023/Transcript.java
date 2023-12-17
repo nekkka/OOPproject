@@ -1,8 +1,9 @@
 package unisystem2023;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Transcript {
+public class Transcript implements Serializable {
     private ArrayList<Double> allGPA;
     private Semester semester;
     private ArrayList<String> allLetterGrades;
