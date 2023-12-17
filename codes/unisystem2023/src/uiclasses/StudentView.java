@@ -105,14 +105,13 @@ public class StudentView extends UserView {
             try {
                 System.out.println("0. Exit");
                 System.out.println("1. View news");
-                System.out.println("2. View personal info");
-                System.out.println("3. Change password");
-                System.out.println("4. View attendance");
-                System.out.println("5. Register to a course");
-                System.out.println("6. Drop course");
-                System.out.println("7. View marks");
-                System.out.println("8. View transcript");
-                System.out.println("9. Researcher menu");
+                System.out.println("2. Change password");
+                System.out.println("3. View attendance");
+                System.out.println("4. Register to a course");
+                System.out.println("5. Drop course");
+                System.out.println("6. View marks");
+                System.out.println("7. View transcript");
+                System.out.println("8. Researcher menu");
                 String ans = reader.readLine();
                 switch (ans) {
                     case "0":
@@ -121,27 +120,24 @@ public class StudentView extends UserView {
                         viewNews();
                         break;
                     case "2":
-                        viewPersonalInfo();
-                        break;
-                    case "3":
                         changePassword();
                         break;
-                    case "4":
+                    case "3":
                         viewAttendance();
                         break;
-                    case "5":
+                    case "4":
                         register();
                         break;
-                    case "6":
+                    case "5":
                         dropCourse();
                         break;
-                    case "7":
+                    case "6":
                         viewMarks();
                         break;
-                    case "8":
+                    case "7":
                         viewTranscript();
                         break;
-                    case "9":
+                    case "8":
                         researcherMenu();
                         break;
                     default:

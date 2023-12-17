@@ -85,11 +85,10 @@ public class EmployeeView extends UserView {
 			try{
 				print("0. Exit");
 				print("1. View news");
-				print("2. View personal info");
-				print("3. Change password");
-				print("4. View messages");
-				print("5. Send message");
-				print("6. Researchers menu");
+				print("2. Change password");
+				print("3. View messages");
+				print("4. Send message");
+				print("5. Researchers menu");
 				String ans = reader.readLine();
 				switch(ans){
 					case "0":
@@ -98,18 +97,15 @@ public class EmployeeView extends UserView {
 						viewNews();
 						break;
 					case "2":
-						viewPersonalInfo();
-						break;
-					case "3":
 						changePassword();
 						break;
-					case "4":
+					case "3":
 						viewMessages();
 						break;
-					case "5":
+					case "4":
 						sendMessage();
 						break;
-					case "6":
+					case "5":
 						researchersMenu();
 					default:
 						print("No such option");

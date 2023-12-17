@@ -3,8 +3,8 @@ package uiclasses;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-import data.Course;
-import data.Data;
+import courses.Courses;
+import unisystem2023.Database;
 import users.Researcher;
 import users.Student;
 import users.Teacher;
@@ -19,16 +19,16 @@ public class TeacherView extends EmployeeView{
 		super(teacher);
 	}
 
-	public List <Course> viewCourses() throws IOException{
-		List <Course> courses = Data.getInstance().getTeacherCourses((Teacher)user);
-		for(Course cur: courses){
+	public List <Courses> viewCourses() throws IOException{
+		List <Courses> courses = Database.getInstance().getTeacherCourses((Teacher)user);
+		for(Courses cur: courses){
 			print(cur.toString());
 		}
 		return courses;
 	}
 
-	public List <Student> viewStudents(Course c) throws IOException{
-		List <Student> students = Data.getInstance().getUsers().stream()
+	public List <Student> viewStudents(Courses c) throws IOException{
+		List <Student> students = Database.getInstance().getUsers().stream()
 								  .filter(u -> u instanceof Student).map(s -> (Student)s)
 								  .filter(s -> ((Student)s).getCourses().contains(c))
 								  .collect(Collectors.toList());
@@ -39,7 +39,7 @@ public class TeacherView extends EmployeeView{
 	}
 	
 	public void researcherMenu(){
-		Researcher r = Data.getInstance().getResearcher((Student)user);
+		Researcher r = Database.getInstance().getResearcher((Student)user);
 		if(r == null){
 			r = new Researcher((Student)user);
 		}
@@ -47,9 +47,9 @@ public class TeacherView extends EmployeeView{
 	}
 
 	public void putMark() throws IOException{
-		Course course;
+		Courses course;
 		while(true){
-			List <Course> courses = viewCourses();
+			List <Courses> courses = viewCourses();
 			print("Insert your course name or 0 to exit");
 			final String ans = reader.readLine();
 			if(ans.equals("0")){
@@ -110,13 +110,12 @@ public class TeacherView extends EmployeeView{
 			try{
 				print("0. Exit");
 				print("1. View news");
-				print("2. View personal info");
-				print("3. Change password");
-				print("4. View messages");
-				print("5. Send message");
-				print("6. View courses");
-                print("7. Put mark");
-                print("8. Researcher menu");
+				print("2. Change password");
+				print("3. View messages");
+				print("4. Send message");
+				print("5. View courses");
+                print("6. Put mark");
+                print("7. Researcher menu");
 				String ans = reader.readLine();
 				switch(ans){
 					case "0":
@@ -125,24 +124,21 @@ public class TeacherView extends EmployeeView{
 						viewNews();
 						break;
 					case "2":
-						viewPersonalInfo();
-						break;
-					case "3":
 						changePassword();
 						break;
-					case "4":
+					case "3":
 						viewMessages();
 						break;
-					case "5":
+					case "4":
 						sendMessage();
 						break;
-					case "6":
+					case "5":
 						viewCourses();
 						break;
-                    case "7":
+                    case "6":
 						putMark();
 						break;
-                    case "8":
+                    case "7":
 						researcherMenu();
 						break;
 					default:

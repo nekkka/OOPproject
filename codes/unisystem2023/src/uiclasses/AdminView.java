@@ -54,11 +54,10 @@ public class AdminView extends UserView{
 			try{
 				print("0. Exit");
 				print("1. View news");
-				print("2. View personal info");
-				print("3. Change password");
-				print("4. Create user");
-				print("5. View users");
-				print("6. Delete user");
+				print("2. Change password");
+				print("3. Create user");
+				print("4. View users");
+				print("5. Delete user");
 				String ans = reader.readLine();
 				switch(ans){
 					case "0":
@@ -67,18 +66,15 @@ public class AdminView extends UserView{
 						viewNews();
 						break;
 					case "2":
-						viewPersonalInfo();
-						break;
-					case "3":
 						changePassword();
 						break;
-					case "4":
+					case "3":
 						createUser();
 						break;
-					case "5":
+					case "4":
 						viewUsers();
 						break;
-					case "6":
+					case "5":
 						deleteUser();
 						break;
 					default:

@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Collections;
 import java.util.Vector;
-import data.Data;
-import data.News;
+import unisystem2023.Database;
+import unisystem2023.News;
 import users.User;
 
 public abstract class UserView{
@@ -30,7 +30,7 @@ public abstract class UserView{
 	}
 
 	public void viewNews() throws IOException{
-		Vector <News> news = Data.getInstance().getNews();
+		Vector <News> news = Database.getInstance().getNews();
 		Collections.reverse(news);
 		while(true){
 			print("0. Exit");
@@ -61,9 +61,6 @@ public abstract class UserView{
 		}
 	}
 
-	public void viewPersonalInfo() throws IOException{
-		print(user.getPersonalInfo().toString());
-	}
 
 	public abstract void main();
 

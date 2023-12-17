@@ -1,7 +1,7 @@
 package uiclasses;
 
 import java.io.IOException;
-import data.ResearchPaper;
+import unisystem2023.ResearchPaper;
 import users.Researcher;
 
 public class ResearcherView extends UserView{
