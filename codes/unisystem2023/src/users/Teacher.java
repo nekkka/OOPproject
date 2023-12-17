@@ -76,8 +76,8 @@ public class Teacher extends Employee implements Serializable {
         }
     }
 
-    public void putMarks(Courses course, Student student, double mark) {
-        // чекаем учитель препоет ли ваще этот курс
+    public void putMarks(Courses course, Student student, double att1, double att2, double finalExam) {
+        // Проверяем, преподает ли учитель этот курс
         if (coursesAndStudents.containsKey(course)) {
             Vector<Student> students = coursesAndStudents.get(course);
             
@@ -85,15 +85,22 @@ public class Teacher extends Employee implements Serializable {
             if (students.contains(student)) {
                 // Проверяем, существует ли карта оценок студента для этого курса
                 if (!student.getCoursesAndMarks().containsKey(course)) {
-                    // Создаем объект Mark и устанавливаем оценку для студента на этом курсе
-                    Mark studentMark = new Mark(course.getId(), course, mark);
+                    // Создаем объект Mark и устанавливаем оценки для студента на этом курсе
+                    Mark studentMark = new Mark();
+                    studentMark.setAtt1(att1);
+                    studentMark.setAtt2(att2);
+                    studentMark.setFinalExam(finalExam);
+                    
                     student.getCoursesAndMarks().put(course, studentMark);
-                    System.out.println("Mark " + mark + " added for student " + student.getName() + " on course " + course.getCoursesName());
+                    System.out.println("Marks added for student " + student.getName() + " on course " + course.getCoursesName());
                 } else {
-                    // Обновляем оценку для студента на этом курсе
+                    // Обновляем оценки для студента на этом курсе
                     Mark studentMark = student.getCoursesAndMarks().get(course);
-                    studentMark.setMark(mark);
-                    System.out.println("Mark " + mark + " updated for student " + student.getName() + " on course " + course.getCoursesName());
+                    studentMark.setAtt1(att1);
+                    studentMark.setAtt2(att2);
+                    studentMark.setFinalExam(finalExam);
+                    
+                    System.out.println("Marks updated for student " + student.getName() + " on course " + course.getCoursesName());
                 }
             } else {
                 System.out.println("Student not enrolled in the course.");

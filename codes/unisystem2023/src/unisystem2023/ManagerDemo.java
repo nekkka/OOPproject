@@ -14,7 +14,7 @@ public class ManagerDemo {
 			System.out.println(i+1+ ")" +list.get(i));
 	}
 	public boolean showStudents(){
-		if(Data.INSTANCE.students.isEmpty()) {
+		if(Database.INSTANCE.students.isEmpty()) {
 			System.out.println("No students yet...Try adding one");
 			return false;
 		}

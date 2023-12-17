@@ -69,7 +69,7 @@ public class EmployeeView extends UserView {
 		((Employee)user).sendMessage((Employee)receiver, theme, text);
 	}
 
-	public void researcherMenu() {
+	public void researchersMenu() {
 	    Vector<Researcher> researchers = Database.getInstance().getResearchers();
 	    if (researchers.isEmpty()) {
 	        Employee employee = (Employee) user; // Assuming 'user' is an Employee type
@@ -89,7 +89,7 @@ public class EmployeeView extends UserView {
 				print("3. Change password");
 				print("4. View messages");
 				print("5. Send message");
-				print("6. Researcher menu");
+				print("6. Researchers menu");
 				String ans = reader.readLine();
 				switch(ans){
 					case "0":
@@ -110,7 +110,7 @@ public class EmployeeView extends UserView {
 						sendMessage();
 						break;
 					case "6":
-						researcherMenu();
+						researchersMenu();
 					default:
 						print("No such option");
 				}

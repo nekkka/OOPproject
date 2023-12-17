@@ -3,6 +3,8 @@ package users;
 import java.io.Serializable;
 import java.util.List;
 
+import unisystem2023.Database;
+
 public abstract class User implements Serializable {
     private Long id;
     private String login;
@@ -20,7 +22,9 @@ public abstract class User implements Serializable {
     public User(String login, String password) {
     	this.login = login;
         this.password = password;
+        Database.getInstance().addUser(this);
 	}
+    
     
     public User (Long id, String login, String password, String name, String surname, String phoneNumber, String email) {
         this.id = id;

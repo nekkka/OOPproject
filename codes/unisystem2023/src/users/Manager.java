@@ -3,8 +3,10 @@ package users;
 import java.util.ArrayList;
 
 import courses.Courses;
+import enums.ManagerType;
+import unisystem2023.News;
 
-public class Manager{
+public class Manager extends Employee{
     
     //implements InfoTeacher, InfoStudents
 
@@ -14,7 +16,14 @@ public class Manager{
     private ArrayList <News> news;
     private ManagerType type;
     
-    
+    public Manager(){
+		super();
+	}
+
+	public Manager(String login, String password){
+		super(login, password);
+	}
+	
     private ArrayList <Teacher> getTeachers() {
         return this.teachers;
     }
