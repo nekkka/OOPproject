@@ -1,6 +1,8 @@
-package unisystem2023;
+package users;
 
 import java.util.List;
+
+import unisystem2023.CanBeResearcher;
 
 public class PhDStudent extends Student implements CanBeResearcher {
     

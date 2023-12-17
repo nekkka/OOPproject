@@ -1,6 +1,14 @@
 package unisystem2023;
 
 import java.util.Vector;
+
+import courses.Courses;
+import enums.AcademicDegree;
+import enums.Faculty;
+import enums.OrganizationName;
+import users.Student;
+import users.Teacher;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 

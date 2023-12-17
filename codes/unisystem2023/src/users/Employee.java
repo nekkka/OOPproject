@@ -1,6 +1,8 @@
-package unisystem2023;
+package users;
 
 import java.util.Vector;
+
+import unisystem2023.Message;
 
 public abstract class Employee extends User {
     private Vector<Message> messages = new Vector<Message>();

@@ -1,5 +1,7 @@
 package unisystem2023;
 
+import users.Employee;
+
 public class Message {
 	private String theme;
 	private String text;

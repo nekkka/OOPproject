@@ -1,6 +1,8 @@
-package unisystem2023;
+package users;
 
 import java.util.ArrayList;
+
+import courses.Courses;
 
 public class Manager{
     

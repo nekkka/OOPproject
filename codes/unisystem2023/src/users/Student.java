@@ -1,9 +1,16 @@
-package unisystem2023;
+package users;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import courses.Courses;
+import enums.Faculty;
+import enums.OrganizationName;
+import unisystem2023.CanBeResearcher;
+import unisystem2023.Mark;
+import unisystem2023.Transcript;
 
 public class Student extends User implements CanBeResearcher, Serializable {
     private Faculty faculty;

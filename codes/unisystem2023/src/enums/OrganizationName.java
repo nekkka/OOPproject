@@ -1,4 +1,4 @@
-package unisystem2023;
+package enums;
 
 public enum OrganizationName {
 	ArtHouse,

@@ -1,6 +1,9 @@
-package unisystem2023;
+package courses;
 
 import java.util.Vector;
+
+import enums.DayWeek;
+import unisystem2023.DataManager;
 
 
 class Lesson extends DataManager{

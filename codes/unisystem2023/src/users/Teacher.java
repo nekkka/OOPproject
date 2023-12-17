@@ -1,10 +1,15 @@
-package unisystem2023;
+package users;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-public class Teacher extends Employee {
+import courses.Courses;
+import enums.AcademicDegree;
+import enums.Faculty;
+import unisystem2023.Mark;
+
+public class Teacher extends Employee implements Serializable {
     private Faculty faculty;
     private AcademicDegree academicDegree;
     private Map<Courses, Vector<Student>> coursesAndStudents;

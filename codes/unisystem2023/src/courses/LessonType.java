@@ -1,4 +1,4 @@
-package unisystem2023;
+package courses;
 
 public enum LessonType {
 	PRACTICE,LECTURE;

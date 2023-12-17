@@ -3,6 +3,8 @@ package unisystem2023;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import enums.Semester;
+
 public class Transcript implements Serializable {
     private ArrayList<Double> allGPA;
     private Semester semester;

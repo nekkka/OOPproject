@@ -1,11 +1,9 @@
-package unisystem2023;
+package users;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class User implements Comparable <User> {
-    /**
-     * id Long chtobi hranil bolshiye chisla i potom v baze dannih mozno naznachit BIGSERIAL i AUTO-INCREMENT, obichno tak dlya primary key
-     */
+public abstract class User implements Comparable <User>, Serializable {
     private Long id;
     private String login;
     private String password;
@@ -121,10 +119,10 @@ public abstract class User implements Comparable <User> {
 		return name + "'s data: Login: " + login + ", id: " + id + ")";
 	}
     
-    public int compareTo(User u) {
+ /*   public int compareTo(User u) {
 		if(id > u.id) {return 1;}
 		if(id < u.id) {return -1;}
 		return 0;
-	}
+	}*/
 
 }

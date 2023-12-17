@@ -1,7 +1,11 @@
-package unisystem2023;
+package courses;
 
 import java.io.Serializable;
 import java.util.Vector;
+
+import enums.Faculty;
+import enums.Semester;
+import users.Teacher;
 
 public class Courses implements Serializable {
     private String courseName;
