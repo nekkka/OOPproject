@@ -7,7 +7,11 @@ import unisystem2023.ResearchPaper;
 
 public class PhDStudent extends Student implements CanBeResearcher {
     
-    private Researcher researchSupervisor;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Researcher researchSupervisor;
     private List<ResearchPaper> works;
 
     public Researcher getResearchSupervisor() {

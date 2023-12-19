@@ -1,12 +1,17 @@
 package users;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 import enums.OrderStatus;
 
-public class TechSupportSpecialist {
-    private boolean availability;
+public class TechSupportSpecialist implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private boolean availability;
     private Map<String, OrderStatus> tasks;
     private List<String> skills;
 

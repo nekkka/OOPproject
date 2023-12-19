@@ -1,7 +1,6 @@
 package users;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +12,11 @@ import unisystem2023.Mark;
 import unisystem2023.Transcript;
 
 public class Student extends User implements CanBeResearcher, Serializable {
-    private Faculty faculty;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Faculty faculty;
     private int yearOfStudy;
     private double GPA;
     private OrganizationName member;

@@ -6,7 +6,11 @@ import java.util.List;
 import unisystem2023.Database;
 
 public abstract class User implements Serializable {
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Long id;
     private String login;
     private String password;
     private String name;

@@ -5,7 +5,11 @@ import java.util.Vector;
 import unisystem2023.Message;
 
 public abstract class Employee extends User {
-    private Vector<Message> messages = new Vector<Message>();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Vector<Message> messages = new Vector<Message>();
     private double salary;
 
     public Employee() {

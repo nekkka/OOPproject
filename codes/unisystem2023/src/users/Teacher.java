@@ -11,7 +11,11 @@ import enums.Faculty;
 import unisystem2023.Mark;
 
 public class Teacher extends Employee implements Serializable {
-    private Faculty faculty;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Faculty faculty;
     private AcademicDegree academicDegree;
     private Map<Courses, Vector<Student>> coursesAndStudents;
 

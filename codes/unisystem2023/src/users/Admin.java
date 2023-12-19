@@ -6,6 +6,8 @@ import unisystem2023.Database;
 
 public class Admin extends User implements Serializable {
 	
+
+	private static final long serialVersionUID = 1L;
 	private static Admin instance;
     
     protected Admin() {}

@@ -2,16 +2,14 @@ package uiclasses;
 
 import java.util.Scanner;
 
-import data.Data;
+import unisystem2023.Database;
 import users.Admin;
-import users.Librarian;
-import users.ORManager;
-import users.SchoolManager;
+import users.Manager;
 import users.Student;
 import users.Teacher;
 import users.User;
-import views.*;
-public class Main {
+import uiclasses.*;
+public class Test {
     
     public static UserView view;
     public static Scanner scanner = new Scanner(System.in);
@@ -26,15 +24,10 @@ public class Main {
         if(user instanceof Student){
             view = new StudentView(((Student)user));
         }
-        if(user instanceof SchoolManager){
-            view = new SchoolManagerView((SchoolManager)user);
+        if(user instanceof Manager){
+            view = new ManagerView((Manager)user);
         }
-        if(user instanceof ORManager){
-            view = new ORManagerView((ORManager)user);
-        }
-        if(user instanceof Librarian){
-            view = new LibrarianView((Librarian)user);
-        }
+ 
     }
 
     public static void login(){
@@ -45,7 +38,7 @@ public class Main {
             System.out.println("Insert your password: ");
             String password = scanner.next();
             try{
-                user = Data.getInstance().getUser(login, password);
+                user = Database.getInstance().getUsers(login, password);
                 if(user == null){
                 	System.out.println("Wrong username of password");
                 	continue;
@@ -61,9 +54,9 @@ public class Main {
     }
 
     public static void main(String args[]){
-        System.out.println(Data.getInstance().getUsers());
+        System.out.println(Database.getInstance().getUsers());
         login();
         view.main();
-        Data.serialize();
+        Database.serialize();
     }
 }
