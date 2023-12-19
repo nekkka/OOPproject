@@ -38,7 +38,7 @@ public class Test {
             System.out.println("Insert your password: ");
             String password = scanner.next();
             try{
-                user = Database.getInstance().getUsers(login, password);
+                user = Database.getInstance().getUser(login, password); //юда нужно добавить езе имя, фам, номер тел, но это же по сути ступид
                 if(user == null){
                 	System.out.println("Wrong username of password");
                 	continue;
@@ -54,9 +54,9 @@ public class Test {
     }
 
     public static void main(String args[]){
-        System.out.println(Database.getInstance().getUsers());
+        System.out.println(Database.getInstance().getUser());
         login();
         view.main();
-        Database.serialize();
+        Database.saveDatabase();
     }
 }

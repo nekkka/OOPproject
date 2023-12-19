@@ -1,11 +1,12 @@
 package unisystem2023;
 
 import java.io.*;
+import java.util.List;
 import java.util.Vector;
 import courses.Courses;
 import users.*;
 
-public class Database implements Serializable {
+public final class Database implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static Database instance;
@@ -20,6 +21,8 @@ public class Database implements Serializable {
     private Admin admin;
     private Vector<News> news;
     private Vector<Researcher> researchers;
+
+   
 
     // Private constructor for Singleton pattern
     private Database() {
@@ -36,7 +39,7 @@ public class Database implements Serializable {
 
     public static Database getInstance() {
         if (instance == null) {
-            if (new File("database.ser").exists()) {
+            if (new File("datas.ser").exists()) {
                 try {
                     instance = readDatabase();
                 } catch (Exception e) {
@@ -51,10 +54,16 @@ public class Database implements Serializable {
     }
 
     // Getter methods
-    public Vector<User> getUsers() {
+    public Vector<User> getAllUsers() {
         return users;
     }
-
+    
+    public User getUser(String login, String password, String name, String surname, String phoneNumber) {
+        return users.stream()
+                .filter(user -> user.verify(name, password, name, surname, phoneNumber))
+                .findFirst()
+                .orElse(null);
+    }
     public Vector<Employee> getEmployees() {
         return employees;
     }
@@ -140,7 +149,8 @@ public class Database implements Serializable {
         users.add(user);
         if (user instanceof Student) students.add((Student) user);
         else if (user instanceof Teacher) teachers.add((Teacher) user);
-        // Add conditions for other types of users if needed
+        else if (user instanceof Manager) managers.add((Manager) user);
+        else if (user instanceof Employee) employees.add((Employee) user);
     }
 
     public void addCourse(Courses course) {
@@ -156,7 +166,8 @@ public class Database implements Serializable {
         users.remove(user);
         if (user instanceof Student) students.remove(user);
         else if (user instanceof Teacher) teachers.remove(user);
-        // Add conditions for other types of users if needed
+        else if (user instanceof Manager) managers.remove((Manager) user);
+        else if (user instanceof Employee) employees.remove((Employee) user);
     }
 
     public void deleteCourse(Courses course) {
@@ -169,7 +180,7 @@ public class Database implements Serializable {
 
     // Save and read database methods
     private static synchronized Database readDatabase() throws Exception {
-        FileInputStream fis = new FileInputStream("database.ser");
+        FileInputStream fis = new FileInputStream("datas.ser");
         ObjectInputStream ois = new ObjectInputStream(fis);
         Database system = (Database) ois.readObject();
         ois.close();
@@ -178,7 +189,7 @@ public class Database implements Serializable {
     }
 
     public static synchronized void saveDatabase() throws Exception {
-        FileOutputStream fos = new FileOutputStream("database.ser");
+        FileOutputStream fos = new FileOutputStream("datas.ser");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(instance);
         oos.close();
