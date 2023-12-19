@@ -1,14 +1,16 @@
 package courses;
 
 import java.io.Serializable;
-import java.util.Vector;
 
+import enums.CoursesType;
 import enums.Faculty;
 import enums.Semester;
 import users.Teacher;
 
 public class Courses implements Serializable {
-    private String courseName;
+
+	private static final long serialVersionUID = 1L;
+	private String courseName;
     private String id;
     private int credits;
     private CoursesType courseType;
@@ -103,6 +105,14 @@ public class Courses implements Serializable {
 
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
+    }
+    
+    public String getPrerequisites() {
+        return prerequisites;
+    }
+
+    public void setPrerequisites(String prerequisites) {
+        this.prerequisites = prerequisites;
     }
 
     //надо чекнуть

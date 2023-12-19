@@ -1,16 +1,19 @@
 package courses;
 
-import java.util.Vector;
+import java.io.Serializable;
+import java.util.HashMap;
+
 
 import enums.DayWeek;
-import unisystem2023.DataManager;
 
 
-class Lesson{
-    private String lessonName;
+class Lesson implements Serializable {
+
+
+	private static final long serialVersionUID = 1L;
+	private String lessonName;
     private Courses courseName;
-    //private Map<DayWeek, Time> schedule;
-    private Vector<DayWeek> schedule;
+    private HashMap <DayWeek, Time> schedule;
     private int auditorium; // мб экспепшн на номер кабов сделаем
     
     public Lesson() {
@@ -22,7 +25,7 @@ class Lesson{
         this.courseName = courseName;
     }
     
-    public Lesson(String lessonName, Courses courseName, Vector<DayWeek> schedule, int auditorium) {
+    public Lesson(String lessonName, Courses courseName, HashMap <DayWeek, Time> schedule, int auditorium) {
         this.lessonName = lessonName;
         this.courseName = courseName;
         this.schedule = schedule;
@@ -45,11 +48,11 @@ class Lesson{
         this.courseName = courseName;
     }
 
-    public Vector<DayWeek> getSchedule() {
+    public HashMap<DayWeek, Time> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Vector<DayWeek> schedule) {
+    public void setSchedule(HashMap<DayWeek, Time> schedule) {
         this.schedule = schedule;
     }
 

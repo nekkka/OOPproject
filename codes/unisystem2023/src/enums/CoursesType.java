@@ -1,4 +1,4 @@
-package courses;
+package enums;
 
 public enum CoursesType {
 	MAJOR,MINOR,FREE_ELECTIVE;
