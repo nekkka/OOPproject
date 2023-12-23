@@ -1,20 +1,21 @@
 package users;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 import courses.Courses;
 import enums.ManagerType;
 import unisystem2023.News;
+import unisystem2023.Request;
 
-public class Manager extends Employee{
-    
-    //implements InfoTeacher, InfoStudents
+public class Manager extends Employee implements RecieveRequests{
 
-    private ArrayList <Teacher> teachers;
-    private ArrayList <Student> students;
-    private ArrayList <Courses> courses;
-    private ArrayList <News> news;
+	private static final long serialVersionUID = 1L;
+	private static Vector <Teacher> teachers = new Vector <Teacher>();
+    private static Vector <Student> students = new Vector <Student>();
+    private static Vector <Courses> courses= new Vector <Courses>();
+    private static Vector <News> news = new Vector <News>();
     private ManagerType type;
+    private static Vector <Request> requests = new Vector <Request>();
     
     public Manager(){
 		super();
@@ -24,41 +25,41 @@ public class Manager extends Employee{
 		super(login, password);
 	}
 	
-    private ArrayList <Teacher> getTeachers() {
+    private Vector <Teacher> getTeachers() {
         return this.teachers;
     }
     
-    private ArrayList <Teacher> setTeachers(ArrayList <Teacher> teachers) {
+    private void setTeachers(Vector <Teacher> teachers) {
         this.teachers = teachers;
     }
     
 
-    private ArrayList <Student> getStudents() {
+    private Vector <Student> getStudents() {
         return this.students;
     }
     
 
-    private ArrayList <Student> setStudents(ArrayList <Student> students) {
+    private void setStudents(Vector <Student> students) {
         this.students = students;
     }
     
     
-    private ArrayList <Courses> getCourses() {
+    private Vector <Courses> getCourses() {
         return this.courses;
     }
 
 
-    private ArrayList <Courses> setCourses(ArrayList <Courses> courses) {
+    private void setCourses(Vector <Courses> courses) {
         this.courses = courses;
     }
     
 
-    private ArrayList <News> getNews() {
+    private Vector <News> getNews() {
         return this.news;
     }
     
 
-    private ArrayList <News> setNews(ArrayList <News> news) {
+    private void setNews(Vector <News> news) {
         this.news = news;
     }
     
@@ -68,12 +69,12 @@ public class Manager extends Employee{
     }
     
 
-    private ManagerType setType(ManagerType type) {
+    private void setType (ManagerType type) {
         this.type = type;
     }
     
 
-    public ArrayList <Teacher> viewTeacher() {
+    public Vector <Teacher> viewTeacher() {
         //TODO
         return null;
     }
@@ -96,7 +97,7 @@ public class Manager extends Employee{
     }
 
 
-    public ArrayList <Courses> viewCourses() {
+    public Vector <Courses> viewCourses() {
         //TODO
         return null;
     }
@@ -118,13 +119,13 @@ public class Manager extends Employee{
     }
     
 
-    public ArrayList <Courses> viewTeachersCourse() {
+    public Vector <Courses> viewTeachersCourse() {
         //TODO
         return null;
     }
     
 
-    public ArrayList <Student> viewStudent() {
+    public Vector <Student> viewStudent() {
         //TODO
         return null;
     }
@@ -155,6 +156,24 @@ public class Manager extends Employee{
         //TODO
         return "";
     }
+
+	@Override
+	public void completeRequest(Request r) {
+		r.execute();
+		requests.remove(r);
+		
+	}
+
+	@Override
+	public void declineRequest(Request r) {
+		requests.remove(r);
+	}
+	public void addRequest(Request r) {
+		requests.add(r);
+	}
+	public static Vector <Request> getAllRequests(){
+		return requests;
+	}
     
     
 }
