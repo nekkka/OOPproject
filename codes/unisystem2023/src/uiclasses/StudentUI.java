@@ -23,12 +23,11 @@ public class StudentUI extends UserUI {
     }
 
     public void viewAttendance() throws IOException {
-        // Implementation of viewAttendance method using updated Student class methods
-        // ...
+        // если успеем...
     }
 
     public void researcherMenu() {
-        Researcher r = Database.getInstance().getResearcher((Student) user);
+        Researcher r = Database.getInstance().getResearchers((User) user);
         if (r == null) {
             r = new Researcher((Student) user);
         }
@@ -141,7 +140,7 @@ public class StudentUI extends UserUI {
                         researcherMenu();
                         break;
                     default:
-                        System.out.println("No such option");
+                        System.out.println("Not found");
                 }
             } catch (IOException ioe) {
                 System.out.println("Something is wrong");
