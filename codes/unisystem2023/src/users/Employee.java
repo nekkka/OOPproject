@@ -4,7 +4,7 @@ import java.util.Vector;
 
 import unisystem2023.Message;
 
-public abstract class Employee extends User {
+public abstract class Employee extends User implements CanBeResearcher {
     /**
 	 * 
 	 */
@@ -42,7 +42,9 @@ public abstract class Employee extends User {
         this.salary = salary;
     }
 
-    
+    public Researcher becomeaResearcher(){
+		return new Researcher(this);
+	}
     
     public String getName() {
         return super.getName();

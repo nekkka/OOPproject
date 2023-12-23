@@ -11,15 +11,15 @@ import unisystem2023.Database;
 import unisystem2023.News;
 import users.User;
 
-public abstract class UserView{
+public abstract class UserUI{
 
 	protected User user;
 	protected BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	protected BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
 
-	public UserView(){}
+	public UserUI(){}
 
-	public UserView(User user){
+	public UserUI(User user){
 		this.user = user;
 	}
 

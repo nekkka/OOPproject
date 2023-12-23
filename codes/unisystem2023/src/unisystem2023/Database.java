@@ -1,7 +1,6 @@
 package unisystem2023;
 
 import java.io.*;
-import java.util.List;
 import java.util.Vector;
 import courses.Courses;
 import users.*;
@@ -41,7 +40,7 @@ public final class Database implements Serializable {
         if (instance == null) {
             if (new File("datas.ser").exists()) {
                 try {
-                    instance = readDatabase();
+                    instance = readDB();
                 } catch (Exception e) {
                     e.printStackTrace();
                     instance = new Database();
@@ -58,9 +57,9 @@ public final class Database implements Serializable {
         return users;
     }
     
-    public User getUser(String login, String password, String name, String surname, String phoneNumber) {
+    public User getUser(String login, String password) {
         return users.stream()
-                .filter(user -> user.verify(name, password, name, surname, phoneNumber))
+                .filter(user -> user.verify(login, password))
                 .findFirst()
                 .orElse(null);
     }
@@ -99,6 +98,7 @@ public final class Database implements Serializable {
     public Vector<Researcher> getResearchers() {
         return researchers;
     }
+    
     public void addResearcher(Researcher researcher) {
         researchers.add(researcher);
     }
@@ -111,6 +111,11 @@ public final class Database implements Serializable {
     public void setEmployees(Vector<Employee> employees) {
         this.employees = employees;
     }
+    
+    public void setResearchers(Vector<Researcher> researchers) {
+        this.researchers = researchers;
+    }
+
 
     public void setStudents(Vector<Student> students) {
         this.students = students;
@@ -140,9 +145,6 @@ public final class Database implements Serializable {
         this.news = news;
     }
 
-    public void setResearchers(Vector<Researcher> researchers) {
-        this.researchers = researchers;
-    }
 
     // Add methods
     public void addUser(User user) {
@@ -179,7 +181,7 @@ public final class Database implements Serializable {
     }
 
     // Save and read database methods
-    private static synchronized Database readDatabase() throws Exception {
+    private static synchronized Database readDB() throws Exception {
         FileInputStream fis = new FileInputStream("datas.ser");
         ObjectInputStream ois = new ObjectInputStream(fis);
         Database system = (Database) ois.readObject();
@@ -188,7 +190,7 @@ public final class Database implements Serializable {
         return system;
     }
 
-    public static synchronized void saveDatabase() throws Exception {
+    public static synchronized void saveDB() throws Exception {
         FileOutputStream fos = new FileOutputStream("datas.ser");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(instance);

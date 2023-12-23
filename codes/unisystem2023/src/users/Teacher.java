@@ -10,7 +10,7 @@ import enums.AcademicDegree;
 import enums.Faculty;
 import unisystem2023.Mark;
 
-public class Teacher extends Employee implements Serializable {
+public class Teacher extends Employee implements CanBeResearcher, Serializable {
     /**
 	 * 
 	 */
@@ -79,6 +79,10 @@ public class Teacher extends Employee implements Serializable {
             System.out.println("Course not found.");
         }
     }
+    
+    public Researcher becomeaResearcher(){
+		return new Researcher(this);
+	}
 
     public void putMarks(Courses course, Student student, double att1, double att2, double finalExam) {
         // Проверяем, преподает ли учитель этот курс

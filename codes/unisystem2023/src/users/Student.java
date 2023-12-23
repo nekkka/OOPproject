@@ -7,14 +7,11 @@ import java.util.Map;
 import courses.Courses;
 import enums.Faculty;
 import enums.OrganizationName;
-import unisystem2023.CanBeResearcher;
 import unisystem2023.Mark;
 import unisystem2023.Transcript;
 
 public class Student extends User implements CanBeResearcher, Serializable {
-    /**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private Faculty faculty;
     private int yearOfStudy;
@@ -192,9 +189,10 @@ public class Student extends User implements CanBeResearcher, Serializable {
                 && this.courses.equals(student.courses);
     }
 
-    public void makeResearch() {
-        System.out.println("Тут ченить будет потом, обещаю");
-    }
+    
+    public Researcher becomeaResearcher(){
+		return new Researcher(this);
+	}
     
     public String toString(){
 		return getName()+ ", id is "+getId()+", registered courses:  "+(courses.size()==0?"No courses yet ":courses);
@@ -208,6 +206,8 @@ public class Student extends User implements CanBeResearcher, Serializable {
 		result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
 		return result;
 	}
+
+
 
    // @Override
     /*public int compareTo(User o) {

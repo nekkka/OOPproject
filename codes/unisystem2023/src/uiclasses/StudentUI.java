@@ -12,13 +12,13 @@ import unisystem2023.Transcript;
 import users.Researcher;
 import users.Student;
 
-public class StudentView extends UserView {
+public class StudentUI extends UserUI {
 
-    public StudentView() {
+    public StudentUI() {
         super();
     }
 
-    public StudentView(Student student) {
+    public StudentUI(Student student) {
         super(student);
     }
 
@@ -32,7 +32,7 @@ public class StudentView extends UserView {
         if (r == null) {
             r = new Researcher((Student) user);
         }
-        new ResearcherView(r).main();
+        new ResearcherUI(r).main();
     }
 
     public void register() throws IOException {

@@ -9,13 +9,13 @@ import users.Researcher;
 import users.Student;
 import users.Teacher;
 
-public class TeacherView extends EmployeeView{
+public class TeacherUI extends EmployeeUI{
 
-	public TeacherView(){
+	public TeacherUI(){
 		super();
 	}
 
-	public TeacherView(Teacher teacher){
+	public TeacherUI(Teacher teacher){
 		super(teacher);
 	}
 
@@ -43,7 +43,7 @@ public class TeacherView extends EmployeeView{
 		if(r == null){
 			r = new Researcher((Student)user);
 		}
-		new ResearcherView(r).main();
+		new ResearcherUI(r).main();
 	}
 
 	public void putMark() throws IOException{

@@ -8,11 +8,11 @@ import users.Admin;
 import users.User;
 import users.UserFactory;
 
-public class AdminView extends UserView{
+public class AdminUI extends UserUI{
 
-	protected AdminView(){}
+	protected AdminUI(){}
 
-	public AdminView(Admin admin){
+	public AdminUI(Admin admin){
 		super(admin);
 	}
 
@@ -36,9 +36,9 @@ public class AdminView extends UserView{
 		while(true){
 			print("Insert login:");
 			login = reader.readLine();
-			final String costyl = login;
-			if(Database.getInstance().getUsers().stream()
-				   .filter(u -> costyl.equals(u.getLogin()))
+			final String hislogin = login;
+			if(Database.getInstance().getAllUsers().stream()
+				   .filter(u -> hislogin.equals(u.getLogin()))
 				   .collect(Collectors.toList()).isEmpty()){
 				break;
 			}
@@ -88,7 +88,7 @@ public class AdminView extends UserView{
 	}
 
 	public void viewUsers() throws IOException{
-		for(User user: Database.getInstance().getUsers()){
+		for(User user: Database.getInstance().getAllUsers()){
 			print(user.toString());
 		}
 	}
@@ -102,7 +102,7 @@ public class AdminView extends UserView{
 				return;
 			}
 			try{
-				User user = Database.getInstance().getUsers().stream()
+				User user = Database.getInstance().getAllUsers().stream()
 							.filter(s -> s.getLogin().equals(login))
 							.collect(Collectors.toList()).get(0);
 				Database.getInstance().deleteUser(user);

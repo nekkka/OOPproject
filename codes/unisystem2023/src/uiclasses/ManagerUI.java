@@ -2,13 +2,13 @@ package uiclasses;
 
 import users.Manager;
 
-public class ManagerView extends EmployeeView{
+public class ManagerUI extends EmployeeUI{
 
-	public ManagerView(){
+	public ManagerUI(){
 		super();
 	}
 
-	public ManagerView(Manager manager){
+	public ManagerUI(Manager manager){
 		super(manager);
 	}
 

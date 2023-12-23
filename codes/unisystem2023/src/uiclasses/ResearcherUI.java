@@ -4,15 +4,15 @@ import java.io.IOException;
 import unisystem2023.ResearchPaper;
 import users.Researcher;
 
-public class ResearcherView extends UserView{
+public class ResearcherUI extends UserUI{
 
 	Researcher researcher;
 
-	public ResearcherView(){
+	public ResearcherUI(){
 		super();
 	}
 
-	public ResearcherView(Researcher researcher){
+	public ResearcherUI(Researcher researcher){
 		this.researcher = researcher;
 	}
 

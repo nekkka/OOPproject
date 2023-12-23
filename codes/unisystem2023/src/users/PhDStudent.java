@@ -1,8 +1,6 @@
 package users;
 
 import java.util.List;
-
-import unisystem2023.CanBeResearcher;
 import unisystem2023.ResearchPaper;
 
 public class PhDStudent extends Student implements CanBeResearcher {
@@ -38,4 +36,8 @@ public class PhDStudent extends Student implements CanBeResearcher {
         // TODO: Implement method for writing diploma
         return ""; // Placeholder return statement, modify as per implementation
     }
+    
+    public Researcher becomeaResearcher(){
+		return new Researcher(this);
+	}
 }

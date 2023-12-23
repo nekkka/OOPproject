@@ -9,25 +9,29 @@ import unisystem2023.ResearchPaper;
 
 public class Researcher implements Serializable, Comparable<Researcher> {
 
-    private User researcher;
+
+	private static final long serialVersionUID = 1L;
+	private CanBeResearcher researcher;
     private Vector<ResearchPaper> researches = new Vector<>();
-    private Integer hIndex;
+	    private Integer hIndex;
 
     {
-        Database.getInstance().setResearchers(this);
+        Database.getInstance().addResearcher(this);
+    }
+    
+    public Researcher(CanBeResearcher researcher) {
+        this.researcher = researcher;
     }
 
+    
     public Researcher() {
         super();
         researches = new Vector<>();
         hIndex = 0;
     }
 
-    public Researcher(User researcher) {
-        this.researcher = researcher;
-    }
 
-    public User getDecoratedObject() {
+    public CanBeResearcher getDecoratedObject() {
         return researcher;
     }
 
@@ -35,10 +39,6 @@ public class Researcher implements Serializable, Comparable<Researcher> {
         return researches;
     }
 
-    @Override
-    public int compareTo(Researcher r) {
-        return Integer.compare(this.researches.size(), r.researches.size());
-    }
 
     public void addResearch(ResearchPaper researchPaper) {
         researches.add(researchPaper);
@@ -64,4 +64,9 @@ public class Researcher implements Serializable, Comparable<Researcher> {
     public Integer calculateHIndex() {
         return hIndex;
     }
+    
+    public int compareTo(Researcher r) {
+        return this.hIndex.compareTo(r.hIndex);
+    }
+
 }

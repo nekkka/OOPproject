@@ -9,11 +9,11 @@ import users.Employee;
 import users.Researcher;
 import users.User;
 
-public class EmployeeView extends UserView {
+public class EmployeeUI extends UserUI {
 
-	public EmployeeView(){}
+	public EmployeeUI(){}
 
-	public EmployeeView(Employee employee){
+	public EmployeeUI(Employee employee){
 		super(employee);
 	}
 
@@ -52,7 +52,7 @@ public class EmployeeView extends UserView {
 		String name = reader.readLine();
 		while(true){
 			try{
-				receiver = Database.getInstance().getUsers().stream()
+				receiver = Database.getInstance().getAllUsers().stream()
 				.filter(u-> u instanceof Employee)
 				.filter(e -> e.getLogin().equals(name))
 				.collect(Collectors.toList()).get(0);
@@ -76,7 +76,7 @@ public class EmployeeView extends UserView {
 	        researchers.add(new Researcher(employee)); // Create a new Researcher instance using the employee
 	        Database.getInstance().setResearchers(researchers); // Set the updated list of researchers in the database
 	    }
-	    new ResearcherView().main(); // Instantiate the ResearcherView and call its main method
+	    new ResearcherUI().main(); // Instantiate the ResearcherView and call its main method
 	}
 
 

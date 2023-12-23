@@ -130,9 +130,9 @@ public abstract class User implements Serializable {
         //this.role = null;
     }
     
-    public boolean verify(String login, String password, String name, String surname, String phoneNumber) {
-		return this.login.equals(login) && password.equals(password) && name.equals(name)&& surname.equals(surname) && phoneNumber.equals(phoneNumber);
-	}
+    public boolean verify(String login, String password) {
+		return this.login.equals(login) && password.equals(password);
+    }
     
     public String toString() {
 		return name + "'s data: Login: " + login + ", id: " + id + ")";

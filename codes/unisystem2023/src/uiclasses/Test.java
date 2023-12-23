@@ -8,24 +8,23 @@ import users.Manager;
 import users.Student;
 import users.Teacher;
 import users.User;
-import uiclasses.*;
 public class Test {
     
-    public static UserView view;
+    public static UserUI consoleUI;
     public static Scanner scanner = new Scanner(System.in);
 
     public static void setView(User user){
         if(user instanceof Admin){
-            view = new AdminView(((Admin)user));
+            consoleUI = new AdminUI(((Admin)user));
         }
         if(user instanceof Teacher){
-            view = new TeacherView(((Teacher)user));
+        	consoleUI = new TeacherUI(((Teacher)user));
         }
         if(user instanceof Student){
-            view = new StudentView(((Student)user));
+        	consoleUI = new StudentUI(((Student)user));
         }
         if(user instanceof Manager){
-            view = new ManagerView((Manager)user);
+        	consoleUI = new ManagerUI((Manager)user);
         }
  
     }
@@ -33,30 +32,36 @@ public class Test {
     public static void login(){
         User user;
         while(true){
-            System.out.println("Insert your login");
+            System.out.println("Insert your login: ");
             String login = scanner.next();
             System.out.println("Insert your password: ");
             String password = scanner.next();
             try{
                 user = Database.getInstance().getUser(login, password); //юда нужно добавить езе имя, фам, номер тел, но это же по сути ступид
                 if(user == null){
-                	System.out.println("Wrong username of password");
+                	System.out.println("Wrong username of password. Try again.");
                 	continue;
                 }
-                System.out.println("Login was successfull");
+                System.out.println("Login was successfull! Welcome");
                 setView(user);
                 return;
             }
             catch (Exception e){
-                System.out.println("Wrong username or password");
+                System.out.println("Wrong username or password. Try again.");
             }
         }
     }
 
     public static void main(String args[]){
-        System.out.println(Database.getInstance().getUser());
-        login();
-        view.main();
-        Database.saveDatabase();
+        login(); // Вызываем метод для аутентификации пользователя
+        if (consoleUI != null) {
+        	consoleUI.main(); // Вызываем основной метод представления, если представление установлено
+        }
+        try {
+            Database.saveDB(); // Сохраняем базу данных
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 }
