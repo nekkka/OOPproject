@@ -3,6 +3,8 @@ package unisystem2023;
 import java.io.Serializable;
 import java.util.Objects;
 
+import main.Database;
+
 
 public class News implements Serializable{
 	/**

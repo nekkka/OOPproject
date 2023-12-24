@@ -1,14 +1,12 @@
 package uiclasses;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
+import java.util.Vector;
 import java.util.stream.Collectors;
 
+import main.Database;
 import courses.Courses;
-import courses.Lesson;
-import unisystem2023.Database;
-import unisystem2023.Transcript;
 import users.Researcher;
 import users.Student;
 
@@ -27,15 +25,19 @@ public class StudentUI extends UserUI {
     }
 
     public void researcherMenu() {
-        Researcher r = Database.getInstance().getResearchers((User) user);
-        if (r == null) {
+        Vector<Researcher> researchers = Database.getInstance().getResearchers();
+        int index = researchers.indexOf(user);
+        Researcher r;
+        if (index == -1) {
             r = new Researcher((Student) user);
+        } else {
+        	r = researchers.get(index);
         }
         new ResearcherUI(r).main();
     }
 
     public void register() throws IOException {
-        Set<Courses> studentCourses = ((Student) user).getCourses();
+        Set<Courses> studentCourses = ((Student) user).getCourses().keySet();
         while (true) {
             Set<Courses> registration = Database.getInstance()
                     .getCourses().stream()
@@ -51,7 +53,7 @@ public class StudentUI extends UserUI {
             }
             try {
                 Courses course = registration.stream()
-                        .filter(c -> c.getName().equals(courseString))
+                        .filter(c -> c.getCoursesName().equals(courseString))
                         .collect(Collectors.toList()).get(0);
                 if (((Student) user).register(course)) {
                     System.out.println("Registered successfully");
@@ -65,20 +67,15 @@ public class StudentUI extends UserUI {
     }
 
     public void viewMarks() throws IOException {
-        for (Courses c : ((Student) user).getCourses()) {
+        for (Courses c : ((Student) user).getCourses().keySet()) {
             System.out.println(c.toString() + ((Student) user).getCurrentMarks().get(c).toString());
         }
-    }
-
-    public void viewTranscript() throws IOException {
-        Transcript t = ((Student) user).getTranscript();
-        System.out.println(t.toString());
     }
 
     public void dropCourse() throws IOException {
         while (true) {
             System.out.println("Here is the list of your courses: ");
-            Set<Courses> courses = ((Student) user).getCourses();
+            Set<Courses> courses = ((Student) user).getCourses().keySet();
             for (Courses cur : courses) {
                 System.out.println(cur.toString());
             }
@@ -89,7 +86,7 @@ public class StudentUI extends UserUI {
             }
             try {
                 Courses course = courses.stream()
-                        .filter(c -> c.getName().equals(ans))
+                        .filter(c -> c.getCoursesName().equals(ans))
                         .collect(Collectors.toList()).get(0);
                 ((Student) user).dropCourse(course);
                 System.out.println("Course dropped successfully");
@@ -109,7 +106,6 @@ public class StudentUI extends UserUI {
                 System.out.println("4. Register to a course");
                 System.out.println("5. Drop course");
                 System.out.println("6. View marks");
-                System.out.println("7. View transcript");
                 System.out.println("8. Researcher menu");
                 String ans = reader.readLine();
                 switch (ans) {
@@ -132,9 +128,6 @@ public class StudentUI extends UserUI {
                         break;
                     case "6":
                         viewMarks();
-                        break;
-                    case "7":
-                        viewTranscript();
                         break;
                     case "8":
                         researcherMenu();

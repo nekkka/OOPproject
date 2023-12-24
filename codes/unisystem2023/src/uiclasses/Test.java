@@ -2,7 +2,7 @@ package uiclasses;
 
 import java.util.Scanner;
 
-import unisystem2023.Database;
+import main.Database;
 import users.Admin;
 import users.Manager;
 import users.Student;

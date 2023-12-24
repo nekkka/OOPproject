@@ -8,9 +8,6 @@ public class UserFactory{
 		if(type == UserRole.ADMIN){
 			return new Admin();
 		}
-		if(type == UserRole.RESEARCHER){
-			return new Researcher();
-		}
 		if(type == UserRole.MANAGER){
 			return new Manager();
 		}
@@ -27,9 +24,6 @@ public class UserFactory{
 		if(type == UserRole.ADMIN){
 			return new Admin(login, password);
 		}
-		if(type == UserRole.RESEARCHER){
-			return new Researcher(login, password);
-		}
 		if(type == UserRole.MANAGER){
 			return new Manager(login, password);
 		}
@@ -38,9 +32,6 @@ public class UserFactory{
 		}
 		if(type == UserRole.TEACHER){
 			return new Teacher(login, password);
-		}
-		if(type == UserRole.EMPLOYEE){
-			return new Employee(login, password);
 		}
 		return null;
 	}

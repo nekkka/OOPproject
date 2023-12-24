@@ -3,7 +3,7 @@ package users;
 import java.io.Serializable;
 import java.util.List;
 
-import unisystem2023.Database;
+import main.Database;
 
 public abstract class User implements Serializable {
     /**

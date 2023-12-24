@@ -23,6 +23,10 @@ public class Teacher extends Employee implements CanBeResearcher, Serializable {
         super();
         coursesAndStudents = new HashMap<>();
     }
+    
+    public Teacher(String login, String password) {
+    	super(login, password);
+    }
 
     public Teacher(Long id, String login, String password, String name, String surname, String phoneNumber, String email, double salary,
                    Faculty faculty, AcademicDegree academicDegree, Map<Courses, Vector<Student>> coursesMap) {
@@ -80,7 +84,7 @@ public class Teacher extends Employee implements CanBeResearcher, Serializable {
         }
     }
     
-    public Researcher becomeaResearcher(){
+    public Researcher becomeResearcher(){
 		return new Researcher(this);
 	}
 

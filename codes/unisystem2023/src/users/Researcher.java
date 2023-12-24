@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Vector;
 
-import unisystem2023.Database;
+import main.Database;
 import unisystem2023.ResearchPaper;
 
 public class Researcher implements Serializable, Comparable<Researcher> {

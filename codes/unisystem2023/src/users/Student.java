@@ -8,7 +8,7 @@ import courses.Courses;
 import enums.Faculty;
 import enums.OrganizationName;
 import unisystem2023.Mark;
-import unisystem2023.Transcript;
+
 
 public class Student extends User implements CanBeResearcher, Serializable {
 	
@@ -17,12 +17,16 @@ public class Student extends User implements CanBeResearcher, Serializable {
     private int yearOfStudy;
     private double GPA;
     private OrganizationName member;
-    private HashMap<Courses,Mark> courses;
-    private HashMap<Courses, Mark> coursesAndMarks;
+    private HashMap<Courses,Mark> courses = new HashMap<Courses,Mark>();
+    private HashMap<Courses, Mark> coursesAndMarks = new HashMap<Courses,Mark>();
 
     public Student() {
         super();
         courses = new HashMap<>();
+    }
+    
+    public Student(String login, String password) {
+    	super(login, password);
     }
 
     public Student(Long id, String login, String password, String name, String surname,
@@ -34,6 +38,10 @@ public class Student extends User implements CanBeResearcher, Serializable {
         this.GPA = GPA;
         this.member = member;
         this.courses = courses;
+    }
+    
+    public HashMap<Courses, Mark> getCurrentMarks(){
+    	return coursesAndMarks;
     }
 
     // Геттеры и сеттеры 
@@ -150,10 +158,6 @@ public class Student extends User implements CanBeResearcher, Serializable {
     }
     
 
-    public Transcript getTranscript() {
-        // TODO: Implement the logic to get a transcript
-        return null;
-    }
 
     public void viewTeachers() {
         if (courses != null && !courses.isEmpty()) {
@@ -190,7 +194,7 @@ public class Student extends User implements CanBeResearcher, Serializable {
     }
 
     
-    public Researcher becomeaResearcher(){
+    public Researcher becomeResearcher(){
 		return new Researcher(this);
 	}
     
@@ -206,6 +210,7 @@ public class Student extends User implements CanBeResearcher, Serializable {
 		result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
 		return result;
 	}
+
 
 
 

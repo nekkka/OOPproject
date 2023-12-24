@@ -2,7 +2,7 @@ package users;
 
 import java.io.Serializable;
 
-import unisystem2023.Database;
+import main.Database;
 
 public class Admin extends User implements Serializable {
 	

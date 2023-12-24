@@ -3,7 +3,8 @@ package uiclasses;
 import java.io.IOException;
 import java.util.Vector;
 import java.util.stream.Collectors;
-import unisystem2023.Database;
+
+import main.Database;
 import unisystem2023.Message;
 import users.Employee;
 import users.Researcher;

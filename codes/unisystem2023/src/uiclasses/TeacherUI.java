@@ -2,9 +2,11 @@ package uiclasses;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Vector;
 import java.util.stream.Collectors;
+
+import main.Database;
 import courses.Courses;
-import unisystem2023.Database;
 import users.Researcher;
 import users.Student;
 import users.Teacher;
@@ -28,9 +30,8 @@ public class TeacherUI extends EmployeeUI{
 	}
 
 	public List <Student> viewStudents(Courses c) throws IOException{
-		List <Student> students = Database.getInstance().getUsers().stream()
+		List <Student> students = Database.getInstance().getAllUsers().stream()
 								  .filter(u -> u instanceof Student).map(s -> (Student)s)
-								  .filter(s -> ((Student)s).getCourses().contains(c))
 								  .collect(Collectors.toList());
 		for(Student s: students){
 			print(s.toString());
@@ -38,13 +39,17 @@ public class TeacherUI extends EmployeeUI{
 		return students;
 	}
 	
-	public void researcherMenu(){
-		Researcher r = Database.getInstance().getResearcher((Student)user);
-		if(r == null){
-			r = new Researcher((Student)user);
-		}
-		new ResearcherUI(r).main();
-	}
+    public void researcherMenu() {
+        Vector<Researcher> researchers = Database.getInstance().getResearchers();
+        int index = researchers.indexOf(user);
+        Researcher r;
+        if (index == -1) {
+            r = new Researcher((Teacher) user);
+        } else {
+        	r = researchers.get(index);
+        }
+        new ResearcherUI(r).main();
+    }
 
 	public void putMark() throws IOException{
 		Courses course;
@@ -57,7 +62,7 @@ public class TeacherUI extends EmployeeUI{
 			}
 			try{
 				course = courses.stream()
-						 .filter(c -> c.getName().equals(ans))
+						 .filter(c -> c.getCoursesName().equals(ans))
 						 .collect(Collectors.toList()).get(0);
 				break;
 			}
@@ -90,14 +95,13 @@ public class TeacherUI extends EmployeeUI{
 			String choose = reader.readLine();
 			switch(choose){
 				case "0":
-					student.getCurrentMarks().get(course).setFirstAtt(points);
+					student.getCurrentMarks().get(course).setAtt1(points);
 					break;
 				case "1":
-					student.getCurrentMarks().get(course).setSecondAtt(points);
+					student.getCurrentMarks().get(course).setAtt2(points);
 					break;
 				case "2":
-					student.getCurrentMarks().get(course).setFinalMark(points);
-					student.checkCourses();
+					student.getCurrentMarks().get(course).setFinalExam(points);
 					break;
 				default:
 					print("No such option");

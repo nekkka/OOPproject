@@ -82,20 +82,11 @@ public class Manager extends Employee implements RecieveRequests{
 
     public void deleteCourses() {
         //TODO
-        return null;
     }
 
     public void addCourses() {
         //TODO
-        return null;
     }
-    
-
-    public void addCourses() {
-        //TODO
-        return null;
-    }
-
 
     public Vector <Courses> viewCourses() {
         //TODO
@@ -103,19 +94,13 @@ public class Manager extends Employee implements RecieveRequests{
     }
     
     public void addNews() {
-        //TODO
-        return null;
     }
 
     public void deleteNews() {
-        //TODO
-        return null;
     }
     
 
     public void upgradeNews() {
-        //TODO
-        return null;
     }
     
 
@@ -133,22 +118,16 @@ public class Manager extends Employee implements RecieveRequests{
 
     public void openRegistration() {
         //TODO
-        return null;
     }
     
     public void closeRegistration() {
-        //TODO
-        return null;
     }
     
     public void extendRegistration() {
-        //TODO
-        return null;
     }
     
     public void approveRegistration() {
         //TODO
-        return null;
     }
     
 
@@ -173,6 +152,12 @@ public class Manager extends Employee implements RecieveRequests{
 	}
 	public static Vector <Request> getAllRequests(){
 		return requests;
+	}
+
+	@Override
+	public Researcher becomeResearcher() {
+		// TODO Auto-generated method stub
+		return null;
 	}
     
     

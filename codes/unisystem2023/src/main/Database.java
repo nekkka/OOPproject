@@ -1,8 +1,13 @@
-package unisystem2023;
+package main;
 
 import java.io.*;
+import java.util.List;
+import java.util.Set;
 import java.util.Vector;
+import java.util.stream.Collectors;
+
 import courses.Courses;
+import unisystem2023.News;
 import users.*;
 
 public final class Database implements Serializable {
@@ -196,5 +201,9 @@ public final class Database implements Serializable {
         oos.writeObject(instance);
         oos.close();
         fos.close();
+    }
+    
+    public List<Courses> getTeacherCourses(Teacher t){
+    	return courses.stream().filter(c -> c.getLector().equals(t) || c.getPracticeTeacher().equals(t)).collect(Collectors.toList());
     }
 }

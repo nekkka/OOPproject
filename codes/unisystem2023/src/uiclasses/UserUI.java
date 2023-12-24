@@ -7,7 +7,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Collections;
 import java.util.Vector;
-import unisystem2023.Database;
+
+import main.Database;
 import unisystem2023.News;
 import users.User;
 
