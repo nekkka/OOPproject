@@ -43,7 +43,7 @@ public class AdminUI extends UserUI{
 				   .collect(Collectors.toList()).isEmpty()){
 				break;
 			}
-			print("Username already used, try again");
+			print("Username is already used, try another");
 		}
 		print("Insert password:");
 		password = reader.readLine();
@@ -86,6 +86,8 @@ public class AdminUI extends UserUI{
 				System.out.println("Error");
 			}
 		}
+		
+		
 	}
 
 	public void viewUsers() throws IOException{

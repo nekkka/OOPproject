@@ -4,12 +4,14 @@ import java.util.Vector;
 
 import courses.Courses;
 import enums.ManagerType;
+import enums.UserRole;
 import unisystem2023.News;
 import unisystem2023.Request;
 
 public class Manager extends Employee implements RecieveRequests{
 
 	private static final long serialVersionUID = 1L;
+	static final UserRole role = UserRole.MANAGER;
 	private static Vector <Teacher> teachers = new Vector <Teacher>();
     private static Vector <Student> students = new Vector <Student>();
     private static Vector <Courses> courses= new Vector <Courses>();
@@ -159,6 +161,9 @@ public class Manager extends Employee implements RecieveRequests{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public UserRole getRole() {
+        return role;
+    }
     
     
 }

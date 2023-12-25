@@ -2,11 +2,13 @@ package users;
 
 import java.util.Vector;
 
+import enums.UserRole;
 import unisystem2023.Message;
 
 public abstract class Employee extends User implements CanBeResearcher {
 
 	private static final long serialVersionUID = 1L;
+	static final UserRole role = UserRole.EMPLOYEE;
 	private Vector<Message> messages = new Vector<Message>();
     private double salary;
 
@@ -49,5 +51,8 @@ public abstract class Employee extends User implements CanBeResearcher {
     
     public String getName() {
         return super.getName();
+    }
+    public UserRole getRole() {
+        return role;
     }
 }

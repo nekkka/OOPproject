@@ -8,6 +8,7 @@ import java.util.Vector;
 import courses.Courses;
 import enums.AcademicDegree;
 import enums.Faculty;
+import enums.UserRole;
 import unisystem2023.Mark;
 
 public class Teacher extends Employee implements CanBeResearcher, Serializable {
@@ -15,6 +16,7 @@ public class Teacher extends Employee implements CanBeResearcher, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	static final UserRole role = UserRole.TEACHER;
 	private Faculty faculty;
     private AcademicDegree academicDegree;
     private Map<Courses, Vector<Student>> coursesAndStudents;
@@ -125,5 +127,9 @@ public class Teacher extends Employee implements CanBeResearcher, Serializable {
 
     public void sendComplaint(Student student, String complaint) {
         // в разработке
+    }
+    
+    public UserRole getRole() {
+        return role;
     }
 }

@@ -42,7 +42,7 @@ public class Test {
                 	System.out.println("Wrong username of password. Try again.");
                 	continue;
                 }
-                System.out.println("Login was successfull! Welcome");
+                System.out.println("Login was successfull! Welcome, " + user.getRole());
                 setView(user);
                 return;
             }

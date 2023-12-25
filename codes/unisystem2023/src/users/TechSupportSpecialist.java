@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import enums.OrderStatus;
+import enums.UserRole;
 
 public class TechSupportSpecialist implements Serializable {
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	static final UserRole role = UserRole.TECHSUPPORTSPECIALIST;
 	private boolean availability;
     private Map<String, OrderStatus> tasks;
     private List<String> skills;
@@ -74,5 +76,8 @@ public class TechSupportSpecialist implements Serializable {
                 System.out.println("Task: " + entry.getKey() + ", Status: " + entry.getValue());
             }
         }
+    }
+    public UserRole getRole() {
+        return role;
     }
 }

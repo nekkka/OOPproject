@@ -1,6 +1,8 @@
 package users;
 
 import java.util.List;
+
+import enums.UserRole;
 import unisystem2023.ResearchPaper;
 
 public class PhDStudent extends Student implements CanBeResearcher {
@@ -9,6 +11,7 @@ public class PhDStudent extends Student implements CanBeResearcher {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	static final UserRole role = UserRole.PHDSTUDENT;
 	private Researcher researchSupervisor;
     private List<ResearchPaper> works;
 
@@ -40,4 +43,7 @@ public class PhDStudent extends Student implements CanBeResearcher {
     public Researcher becomeaResearcher(){
 		return new Researcher(this);
 	}
+    public UserRole getRole() {
+        return role;
+    }
 }

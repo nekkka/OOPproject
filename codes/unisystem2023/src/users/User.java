@@ -3,6 +3,7 @@ package users;
 import java.io.Serializable;
 import java.util.List;
 
+import enums.UserRole;
 import main.Database;
 
 public abstract class User implements Serializable {
@@ -17,6 +18,7 @@ public abstract class User implements Serializable {
     private String surname;
     private String phoneNumber;
     private String email;
+    private UserRole role;
     //private String role;
 
     
@@ -118,8 +120,8 @@ public abstract class User implements Serializable {
         return false;
     }
 
-    public void logOut() {
-    	//костыли, надо будет спросить легально ли это
+ /*   public void logOut() {
+    	костыли, надо будет спросить легально ли это
         this.id = null;
         this.login = null;
         this.password = null;
@@ -128,15 +130,19 @@ public abstract class User implements Serializable {
         this.phoneNumber = null;
         this.email = null;
         //this.role = null;
-    }
+    }*/
     
     public boolean verify(String login, String password) {
 		return this.login.equals(login) && password.equals(password);
     }
     
     public String toString() {
-		return name + "'s data: Login: " + login + ", id: " + id + ")";
+		return getRole()+ ": " + "Login: " + login + ", password: " + password + ")";
 	}
+    
+    public UserRole getRole() {
+        return this.role;
+    }
     
  /*   public int compareTo(User u) {
 		if(id > u.id) {return 1;}

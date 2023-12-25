@@ -7,12 +7,14 @@ import java.util.Map;
 import courses.Courses;
 import enums.Faculty;
 import enums.OrganizationName;
+import enums.UserRole;
 import unisystem2023.Mark;
 
 
 public class Student extends User implements CanBeResearcher, Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	static final UserRole role = UserRole.STUDENT;
 	private Faculty faculty;
     private int yearOfStudy;
     private double GPA;
@@ -202,17 +204,10 @@ public class Student extends User implements CanBeResearcher, Serializable {
 		return getName()+ ", id is "+getId()+", registered courses:  "+(courses.size()==0?"No courses yet ":courses);
 	}
     
-    public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((courses == null) ? 0 : courses.hashCode());
-		result = (int) (prime * result + getId());
-		result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-		return result;
-	}
-
-
-
+    public UserRole getRole() {
+        return role;
+    }
+    
 
    // @Override
     /*public int compareTo(User o) {

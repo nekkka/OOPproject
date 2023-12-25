@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Vector;
 
+import enums.UserRole;
 import main.Database;
 import unisystem2023.ResearchPaper;
 
@@ -11,6 +12,7 @@ public class Researcher implements Serializable, Comparable<Researcher> {
 
 
 	private static final long serialVersionUID = 1L;
+	static final UserRole role = UserRole.RESEARCHER;
 	private CanBeResearcher researcher;
     private Vector<ResearchPaper> researches = new Vector<>();
 	    private Integer hIndex;
@@ -67,6 +69,9 @@ public class Researcher implements Serializable, Comparable<Researcher> {
     
     public int compareTo(Researcher r) {
         return this.hIndex.compareTo(r.hIndex);
+    }
+    public UserRole getRole() {
+        return role;
     }
 
 }
