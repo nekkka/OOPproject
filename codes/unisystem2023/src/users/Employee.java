@@ -5,7 +5,7 @@ import java.util.Vector;
 import enums.UserRole;
 import unisystem2023.Message;
 
-public abstract class Employee extends User implements CanBeResearcher {
+public abstract class Employee extends User implements CanBeResearcher{
 
 	private static final long serialVersionUID = 1L;
 	static final UserRole role = UserRole.EMPLOYEE;
@@ -45,9 +45,9 @@ public abstract class Employee extends User implements CanBeResearcher {
         this.salary = salary;
     }
 
-    public Researcher becomeaResearcher(){
+   /* public Researcher becomeaResearcher(){
 		return new Researcher(this);
-	}
+	}*/
     
     public String getName() {
         return super.getName();

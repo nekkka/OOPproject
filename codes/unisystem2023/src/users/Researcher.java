@@ -33,10 +33,6 @@ public class Researcher implements Serializable, Comparable<Researcher> {
     }
 
 
-    public CanBeResearcher getDecoratedObject() {
-        return researcher;
-    }
-
     public Vector<ResearchPaper> getResearches() {
         return researches;
     }

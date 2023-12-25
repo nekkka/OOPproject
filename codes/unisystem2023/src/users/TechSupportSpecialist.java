@@ -7,7 +7,7 @@ import java.util.Map;
 import enums.OrderStatus;
 import enums.UserRole;
 
-public class TechSupportSpecialist implements Serializable {
+public class TechSupportSpecialist extends Employee implements Serializable {
     /**
 	 * 
 	 */
@@ -16,6 +16,10 @@ public class TechSupportSpecialist implements Serializable {
 	private boolean availability;
     private Map<String, OrderStatus> tasks;
     private List<String> skills;
+    
+    public TechSupportSpecialist(String login, String password) {
+    	super(login, password);
+    }
 
     public boolean isAvailability() {
         return availability;
@@ -80,4 +84,5 @@ public class TechSupportSpecialist implements Serializable {
     public UserRole getRole() {
         return role;
     }
+
 }

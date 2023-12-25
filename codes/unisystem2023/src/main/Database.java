@@ -158,6 +158,10 @@ public final class Database implements Serializable {
         else if (user instanceof Teacher) teachers.add((Teacher) user);
         else if (user instanceof Manager) managers.add((Manager) user);
         else if (user instanceof Employee) employees.add((Employee) user);
+        
+        
+        
+        
     }
 
     public void addCourse(Courses course) {
@@ -175,6 +179,10 @@ public final class Database implements Serializable {
         else if (user instanceof Teacher) teachers.remove(user);
         else if (user instanceof Manager) managers.remove((Manager) user);
         else if (user instanceof Employee) employees.remove((Employee) user);
+        
+        
+        
+        
     }
 
     public void deleteCourse(Courses course) {
