@@ -200,9 +200,6 @@ public class Student extends User implements CanBeResearcher, Serializable {
 		return new Researcher(this);
 	}
     
-    public String toString(){
-		return getName()+ ", id is "+getId()+", registered courses:  "+(courses.size()==0?"No courses yet ":courses);
-	}
     
     public UserRole getRole() {
         return role;

@@ -137,7 +137,7 @@ public abstract class User implements Serializable {
     }
     
     public String toString() {
-		return getRole()+ ": " + "Login: " + login + ", password: " + password + ")";
+		return getRole()+ ": " + "Login: " + login + ", password: " + password;
 	}
     
     public UserRole getRole() {
