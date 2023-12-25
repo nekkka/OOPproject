@@ -26,6 +26,7 @@ public class Teacher extends Employee implements CanBeResearcher, Serializable {
         coursesAndStudents = new HashMap<>();
     }
     
+    
     public Teacher(String login, String password) {
     	super(login, password);
     }

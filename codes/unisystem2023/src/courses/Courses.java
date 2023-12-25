@@ -19,6 +19,7 @@ public class Courses implements Serializable {
     private Teacher lector = new Teacher();
     private Teacher practice = new Teacher();
     private Faculty faculty;
+    private boolean registrationOpen;
 
     public Courses() {
     }
@@ -42,6 +43,14 @@ public class Courses implements Serializable {
     }
 
     // Getters and setters
+    
+    public boolean isRegistrationOpen() {
+        return registrationOpen;
+    }
+
+    public void setRegistrationOpen(boolean registrationOpen) {
+        this.registrationOpen = registrationOpen;
+    }
 
     public String getCoursesName() {
         return courseName;

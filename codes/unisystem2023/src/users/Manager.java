@@ -5,19 +5,14 @@ import java.util.Vector;
 import courses.Courses;
 import enums.ManagerType;
 import enums.UserRole;
+import main.Database;
 import unisystem2023.News;
-import unisystem2023.Request;
 
-public class Manager extends Employee implements RecieveRequests{
+public class Manager extends Employee{
 
 	private static final long serialVersionUID = 1L;
 	static final UserRole role = UserRole.MANAGER;
-	private static Vector <Teacher> teachers = new Vector <Teacher>();
-    private static Vector <Student> students = new Vector <Student>();
-    private static Vector <Courses> courses= new Vector <Courses>();
-    private static Vector <News> news = new Vector <News>();
     private ManagerType type;
-    private static Vector <Request> requests = new Vector <Request>();
     
     public Manager(){
 		super();
@@ -26,83 +21,50 @@ public class Manager extends Employee implements RecieveRequests{
 	public Manager(String login, String password){
 		super(login, password);
 	}
-	
-    private Vector <Teacher> getTeachers() {
-        return this.teachers;
-    }
-    
-    private void setTeachers(Vector <Teacher> teachers) {
-        this.teachers = teachers;
-    }
+
     
 
-    private Vector <Student> getStudents() {
-        return this.students;
-    }
-    
-
-    private void setStudents(Vector <Student> students) {
-        this.students = students;
-    }
-    
-    
-    private Vector <Courses> getCourses() {
-        return this.courses;
-    }
-
-
-    private void setCourses(Vector <Courses> courses) {
-        this.courses = courses;
-    }
-    
-
-    private Vector <News> getNews() {
-        return this.news;
-    }
-    
-
-    private void setNews(Vector <News> news) {
-        this.news = news;
-    }
-    
-
-    private ManagerType getType() {
+	private ManagerType getType() {
         return this.type;
     }
-    
 
-    private void setType (ManagerType type) {
+    private void setType(ManagerType type) {
         this.type = type;
     }
     
 
-    public Vector <Teacher> viewTeacher() {
-        //TODO
-        return null;
+    public void deleteCourse(Courses course, Teacher teacher) {
+        if (Database.getInstance().getCourses().contains(course) && Database.getInstance().getTeacherCourses(teacher).contains(course)) {
+            Database.getInstance().deleteCourse(course);
+            System.out.println("Course deleted successfully");
+        } else {
+            System.out.println("Course not found");
+        }
+    }
+
+    public void addCourses(Courses course, Teacher teacher) {
+        Database.getInstance().addCourse(course);
+        System.out.println("Course added successfully");
+    }
+
+    public Vector<Courses> viewCourses() {
+        return Database.getInstance().getCourses();
     }
     
-
-    public void deleteCourses() {
-        //TODO
+    public void addNews(String newsTitle, String content) {
+        News newsItem = new News(newsTitle, content);
+        Database.getInstance().addNews(newsItem);
+        System.out.println("News added successfully");
     }
 
-    public void addCourses() {
-        //TODO
-    }
 
-    public Vector <Courses> viewCourses() {
-        //TODO
-        return null;
-    }
-    
-    public void addNews() {
-    }
-
-    public void deleteNews() {
-    }
-    
-
-    public void upgradeNews() {
+    public void deleteNews(News newsTitle) {
+        if (Database.getInstance().getNews().contains(newsTitle)) {
+            Database.getInstance().deleteNews(newsTitle);
+            System.out.println("News deleted successfully");
+        } else {
+            System.out.println("News not found");
+        }
     }
     
 
@@ -111,54 +73,69 @@ public class Manager extends Employee implements RecieveRequests{
         return null;
     }
     
-
-    public Vector <Student> viewStudent() {
-        //TODO
-        return null;
+    public void openRegistrationForCourse(Courses course) {
+        course.setRegistrationOpen(true); // Открыть регистрацию для курса
+        System.out.println("Registration for course " + course.getCoursesName() + " is now open.");
     }
     
 
-    public void openRegistration() {
-        //TODO
+    public void openRegistration(Courses course) {
+        if (Database.getInstance().getCourses().contains(course)) {
+            if (!course.isRegistrationOpen()) {
+                Vector<Student> registeredStudents = Database.getInstance().getRegisteredStudents();
+                if (registeredStudents.size() < 100) {
+                    course.setRegistrationOpen(true);
+                    System.out.println("Registration for the course '" + course.getCoursesName() + "' is now open.");
+                } else {
+                    System.out.println("The maximum number of students (100) for this course has been reached. Cannot open registration.");
+                }
+            } else {
+                System.out.println("Registration for the course '" + course.getCoursesName() + "' is already open.");
+            }
+        } else {
+            System.out.println("Course not found in the database.");
+        }
     }
-    
-    public void closeRegistration() {
-    }
-    
-    public void extendRegistration() {
-    }
-    
-    public void approveRegistration() {
-        //TODO
-    }
-    
 
+    public void closeRegistration(Courses course) {
+        if (Database.getInstance().getCourses().contains(course)) {
+            if (course.isRegistrationOpen()) {
+                course.setRegistrationOpen(false);
+                System.out.println("Registration for the course '" + course.getCoursesName() + "' is now closed.");
+            } else {
+                System.out.println("Registration for the course '" + course.getCoursesName() + "' is already closed.");
+            }
+        } else {
+            System.out.println("Course not found in the database.");
+        }
+    }
+
+    public void approveRegistration(Courses course, Student student) {
+        if (Database.getInstance().getCourses().contains(course)) {
+            if (course.isRegistrationOpen()) {
+                Vector<Student> registeredStudents = Database.getInstance().getRegisteredStudents();
+                if (!registeredStudents.contains(student)) {
+                    registeredStudents.add(student);
+                    System.out.println("Student '" + student.getName() + "' approved for the course '" + course.getCoursesName() + "'.");
+                } else {
+                    System.out.println("Student '" + student.getName() + "' is already registered for the course '" + course.getCoursesName() + "'.");
+                }
+            } else {
+                System.out.println("Registration for the course '" + course.getCoursesName() + "' is closed. Cannot approve registration.");
+            }
+        } else {
+            System.out.println("Course not found in the database.");
+        }
+    }
+    
 	@Override
-	public void completeRequest(Request r) {
-		r.execute();
-		requests.remove(r);
-		
+	public Researcher becomeResearcher(){
+		return new Researcher(this);
 	}
-
-	@Override
-	public void declineRequest(Request r) {
-		requests.remove(r);
-	}
-	public void addRequest(Request r) {
-		requests.add(r);
-	}
-	public static Vector <Request> getAllRequests(){
-		return requests;
-	}
-
-	@Override
-	public Researcher becomeResearcher() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	public UserRole getRole() {
         return role;
     }
-    
-    
+     
 }
+

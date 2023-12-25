@@ -15,7 +15,7 @@ public class Researcher extends User implements Serializable, Comparable<Researc
 	static final UserRole role = UserRole.RESEARCHER;
 	private CanBeResearcher researcher;
     private Vector<ResearchPaper> researches = new Vector<>();
-	    private Integer hIndex;
+	private Integer hIndex;
 
     {
         Database.getInstance().addResearcher(this);

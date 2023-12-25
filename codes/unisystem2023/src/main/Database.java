@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import courses.Courses;
 import unisystem2023.News;
+import unisystem2023.Request;
 import users.*;
 
 public final class Database implements Serializable {
@@ -26,7 +27,7 @@ public final class Database implements Serializable {
     private Admin admin;
     private Vector<News> news;
     private Vector<Researcher> researchers;
-
+    private Vector<Student> registeredStudents;
    
 
     // Private constructor for Singleton pattern
@@ -40,6 +41,7 @@ public final class Database implements Serializable {
         techSupportSpecialists = new Vector<>();
         news = new Vector<>();
         researchers = new Vector<>();
+        registeredStudents = new Vector <Student>();
     }
 
     public static Database getInstance() {
@@ -107,6 +109,15 @@ public final class Database implements Serializable {
     
     public void addResearcher(Researcher researcher) {
         researchers.add(researcher);
+    }
+    
+    public Vector<Student> getRegisteredStudents() {
+        return registeredStudents;
+    }
+
+    // Добавить студента в список зарегистрированных
+    public void registerStudent(Student student) {
+        registeredStudents.add(student);
     }
 
     // Setter methods
