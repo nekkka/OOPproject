@@ -133,11 +133,6 @@ public class Manager extends Employee implements RecieveRequests{
     }
     
 
-    public String toString() {
-        //TODO
-        return "";
-    }
-
 	@Override
 	public void completeRequest(Request r) {
 		r.execute();

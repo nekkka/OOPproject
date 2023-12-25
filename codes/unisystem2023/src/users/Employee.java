@@ -8,7 +8,6 @@ import unisystem2023.Message;
 public abstract class Employee extends User implements CanBeResearcher{
 
 	private static final long serialVersionUID = 1L;
-	static final UserRole role = UserRole.EMPLOYEE;
 	private Vector<Message> messages = new Vector<Message>();
     private double salary;
 
@@ -45,14 +44,12 @@ public abstract class Employee extends User implements CanBeResearcher{
         this.salary = salary;
     }
 
-   /* public Researcher becomeaResearcher(){
-		return new Researcher(this);
-	}*/
     
     public String getName() {
         return super.getName();
     }
-    public UserRole getRole() {
-        return role;
-    }
+    
+    public String toString() {
+		return getRole()+ ": " + "Login: " + super.getLogin() + ", password: " + super.getPassword();
+	}
 }

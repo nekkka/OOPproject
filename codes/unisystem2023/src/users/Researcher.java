@@ -8,7 +8,7 @@ import enums.UserRole;
 import main.Database;
 import unisystem2023.ResearchPaper;
 
-public class Researcher implements Serializable, Comparable<Researcher> {
+public class Researcher extends User implements Serializable, Comparable<Researcher> {
 
 
 	private static final long serialVersionUID = 1L;
@@ -69,5 +69,8 @@ public class Researcher implements Serializable, Comparable<Researcher> {
     public UserRole getRole() {
         return role;
     }
+    public String toString() {
+		return getRole()+ ": " + "Login: " + super.getLogin() + ", password: " + super.getPassword();
+	}
 
 }

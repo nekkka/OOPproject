@@ -18,6 +18,7 @@ public final class Database implements Serializable {
     private Vector<User> users;
     private Vector<Employee> employees;
     private Vector<Student> students;
+    private Vector<PhDStudent> phdstudents;
     private Vector<Teacher> teachers;
     private Vector<Courses> courses;
     private Vector<Manager> managers;
@@ -158,8 +159,10 @@ public final class Database implements Serializable {
         else if (user instanceof Teacher) teachers.add((Teacher) user);
         else if (user instanceof Manager) managers.add((Manager) user);
         else if (user instanceof Employee) employees.add((Employee) user);
+        else if (user instanceof PhDStudent) phdstudents.add((PhDStudent) user);
+        else if (user instanceof TechSupportSpecialist) techSupportSpecialists.add((TechSupportSpecialist) user);
         
-        
+   
         
         
     }
@@ -179,6 +182,10 @@ public final class Database implements Serializable {
         else if (user instanceof Teacher) teachers.remove(user);
         else if (user instanceof Manager) managers.remove((Manager) user);
         else if (user instanceof Employee) employees.remove((Employee) user);
+        else if (user instanceof PhDStudent) phdstudents.remove((PhDStudent) user);
+        else if (user instanceof TechSupportSpecialist) techSupportSpecialists.remove((TechSupportSpecialist) user);
+        
+   
         
         
         

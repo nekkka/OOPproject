@@ -34,9 +34,6 @@ public class UIFactory {
 		else if(user.getClass().equals(Teacher.class)) {
 			return new TeacherUI((Teacher) user);
 		}
-		else if(user.getClass().equals(Employee.class)) {
-			return new EmployeeUI((Employee) user);
-		}		
 		return null;
 	}
 }

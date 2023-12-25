@@ -73,7 +73,7 @@ public class EmployeeUI extends UserUI {
 	public void researchersMenu() {
 	    Vector<Researcher> researchers = Database.getInstance().getResearchers();
 	    if (researchers.isEmpty()) {
-	        Employee employee = (Employee) user; // Assuming 'user' is an Employee type
+	        Employee employee = (Employee) user; // casting 'user' is an Employee type
 	        researchers.add(new Researcher(employee)); // Create a new Researcher instance using the employee
 	        Database.getInstance().setResearchers(researchers); // Set the updated list of researchers in the database
 	    }

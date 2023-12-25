@@ -7,24 +7,33 @@ import java.util.Map;
 import enums.OrderStatus;
 import enums.UserRole;
 
-public class TechSupportSpecialist extends Employee implements Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	static final UserRole role = UserRole.TECHSUPPORTSPECIALIST;
-	private boolean availability;
+public class TechSupportSpecialist extends User implements Serializable {
+    
+ private static final long serialVersionUID = 1L;
+ private boolean availability;
     private Map<String, OrderStatus> tasks;
+    private static OrderStatus taskStatus = OrderStatus.NEW;
     private List<String> skills;
     
-    public TechSupportSpecialist(String login, String password) {
-    	super(login, password);
+   
+    public TechSupportSpecialist() {
+        super();
+    }
+    public TechSupportSpecialist(String login, String password){
+		super(login, password);
+	}
+
+    public static OrderStatus getTaskStatus() {
+        return taskStatus;
     }
 
+    public static void setTaskStatus(OrderStatus newTaskStatus) {
+        taskStatus = newTaskStatus;
+    }
     public boolean isAvailability() {
         return availability;
     }
-
+    
     public void setAvailability(boolean availability) {
         this.availability = availability;
     }
@@ -78,11 +87,9 @@ public class TechSupportSpecialist extends Employee implements Serializable {
             System.out.println("Tasks:");
             for (Map.Entry<String, OrderStatus> entry : tasks.entrySet()) {
                 System.out.println("Task: " + entry.getKey() + ", Status: " + entry.getValue());
+                setTaskStatus(OrderStatus.SEEN);
             }
         }
-    }
-    public UserRole getRole() {
-        return role;
     }
 
 }
