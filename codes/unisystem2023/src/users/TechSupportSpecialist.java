@@ -14,6 +14,7 @@ public class TechSupportSpecialist extends User implements Serializable {
     private Map<String, OrderStatus> tasks;
     private static OrderStatus taskStatus = OrderStatus.NEW;
     private List<String> skills;
+    static final UserRole role = UserRole.TECHSUPPORTSPECIALIST;
     
    
     public TechSupportSpecialist() {

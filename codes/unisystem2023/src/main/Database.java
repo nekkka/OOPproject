@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import courses.Courses;
 import unisystem2023.News;
 import unisystem2023.Request;
+import unisystem2023.ResearchPaper;
 import users.*;
 
 public final class Database implements Serializable {
@@ -28,6 +29,7 @@ public final class Database implements Serializable {
     private Vector<News> news;
     private Vector<Researcher> researchers;
     private Vector<Student> registeredStudents;
+    private Vector<ResearchPaper> researchPapers;
    
 
     // Private constructor for Singleton pattern

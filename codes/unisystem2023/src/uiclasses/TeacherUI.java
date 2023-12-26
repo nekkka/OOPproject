@@ -91,7 +91,7 @@ public class TeacherUI extends EmployeeUI{
 			double points = Double.parseDouble(reader.readLine());
 			print("Insert 0 to put first attestation");
 			print("Insert 1 to put second attestation");
-			print("Insert 2 to put final");
+			print("Insert 2 to put final exam's mark");
 			String choose = reader.readLine();
 			switch(choose){
 				case "0":
@@ -104,7 +104,7 @@ public class TeacherUI extends EmployeeUI{
 					student.getCurrentMarks().get(course).setFinalExam(points);
 					break;
 				default:
-					print("No such option");
+					print("No such option. Try again");
 			}
 		}
 	}

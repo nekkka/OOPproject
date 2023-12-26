@@ -31,6 +31,9 @@ public class ResearcherUI extends UserUI{
 		researcher.addResearch(paper);
 		print("Researching is started!");
 	}
+	
+	
+	
 	public void dropResearch() throws IOException {
 		print("Print the name of researching that you want to drop."
 				+ "'0' is exit.");
