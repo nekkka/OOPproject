@@ -11,7 +11,6 @@ import enums.Faculty;
 import main.Database;
 import unisystem2023.Message;
 import unisystem2023.News;
-import users.Employee;
 import users.Manager;
 import users.Researcher;
 import users.Teacher;
@@ -159,18 +158,14 @@ public class ManagerUI extends EmployeeUI{
 	    System.out.println("Enter news title:");
 	    String newsTitle = reader.readLine();
 	    
-	    System.out.println("Enter news content:");
-	    String content = reader.readLine();
+	    System.out.println("Enter news' details:");
+	    String details = reader.readLine();
 	    
-	    News newsItem = new News(newsTitle, content);
+	    News newsItem = new News(newsTitle, details);
 	    Database.getInstance().addNews(newsItem);
 	    
-	    System.out.println("News added successfully");
-	}
-  
-  
-  
-  
+	    System.out.println("News added successfully!");
+	} 
   
   
   public void assignTeacherToCourse() throws IOException {
@@ -190,23 +185,47 @@ public class ManagerUI extends EmployeeUI{
 
 	    if (courseNumber > 0 && courseNumber <= courses.size()) {
 	        Courses selectedCourse = courses.get(courseNumber - 1);
-	        Teacher lector = null;
-	        Teacher practiceTeacher = null;
-
-	    
-	        System.out.println("Select lector for the course:");
-	        System.out.println("Select practice teacher for the course:");
-	        if (lector != null && practiceTeacher != null) {
-	            selectedCourse.setLector(lector);
-	            selectedCourse.setPracticeTeacher(practiceTeacher);
-	            System.out.println("Teachers assigned to the course successfully.");
-	        } else {
-	            System.out.println("Unable to assign teachers. Please make sure teachers are selected.");
+	        
+	        // Display available teachers
+	        Vector<Teacher> availableTeachers = Database.getInstance().getTeachers();
+	        if (availableTeachers.isEmpty()) {
+	            System.out.println("No teachers available to assign");
+	            return;
 	        }
+	        
+	        System.out.println("Available Teachers:");
+	        for (int i = 0; i < availableTeachers.size(); i++) {
+	            System.out.println((i + 1) + ". " + availableTeachers.get(i).getLogin());
+	        }
+
+	        // Prompt for lector selection
+	        System.out.println("Select lector for the course:");
+	        int lectorNumber = Integer.parseInt(reader.readLine());
+	        if (lectorNumber > 0 && lectorNumber <= availableTeachers.size()) {
+	            Teacher lector = availableTeachers.get(lectorNumber - 1);
+	            selectedCourse.setLector(lector);
+	        } else {
+	            System.out.println("Invalid lector number.");
+	            return;
+	        }
+
+	        // Prompt for practice teacher selection
+	        System.out.println("Select practice teacher for the course:");
+	        int practiceTeacherNumber = Integer.parseInt(reader.readLine());
+	        if (practiceTeacherNumber > 0 && practiceTeacherNumber <= availableTeachers.size()) {
+	            Teacher practiceTeacher = availableTeachers.get(practiceTeacherNumber - 1);
+	            selectedCourse.setPracticeTeacher(practiceTeacher);
+	        } else {
+	            System.out.println("Invalid practice teacher number.");
+	            return;
+	        }
+
+	        System.out.println("Teachers assigned to the course successfully.");
 	    } else {
 	        System.out.println("Invalid course number. Please enter a valid course number.");
 	    }
 	}
+
 
 
 

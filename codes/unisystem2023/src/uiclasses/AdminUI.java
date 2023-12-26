@@ -50,45 +50,43 @@ public class AdminUI extends UserUI{
 		UserFactory.getUser(login, password, type);
 	}
 
-	public void main(){
-		while(true){
-			try{
-				print("0. Exit");
-				print("1. View news");
-				print("2. Change password");
-				print("3. Create user");
-				print("4. View users");
-				print("5. Delete user");
-				String ans = reader.readLine();
-				switch(ans){
-					case "0":
-						return;
-					case "1":
-						viewNews();
-						break;
-					case "2":
-						changePassword();
-						break;
-					case "3":
-						createUser();
-						break;
-					case "4":
-						viewUsers();
-						break;
-					case "5":
-						deleteUser();
-						break;
-					default:
-						print("No such option");
-				}
-			}
-			catch (IOException ioe){
-				System.out.println("Error");
-			}
-		}
-		
-		
+	public void main() {
+	    while (true) {
+	        try {
+	            print("0. Exit");
+	            print("1. View news");
+	            print("2. Change password");
+	            print("3. View users");
+	            print("4. Create user");
+	            print("5. Delete user");
+	            String ans = reader.readLine();
+	            switch (ans) {
+	                case "0":
+	                    return;
+	                case "1":
+	                    viewNews();
+	                    break;
+	                case "2":
+	                    changePassword();
+	                    break;
+	                case "3":
+	                    viewUsers();
+	                    break;
+	                case "4":
+	                    createUser();
+	                    break;
+	                case "5":
+	                    deleteUser();
+	                    break;
+	                default:
+	                    print("No such option");
+	            }
+	        } catch (IOException ioe) {
+	            System.out.println("Error");
+	        }
+	    }
 	}
+
 
 	public void viewUsers() throws IOException{
 		for(User user: Database.getInstance().getAllUsers()){

@@ -30,22 +30,26 @@ public abstract class UserUI{
 		writer.flush();
 	}
 
-	public void viewNews() throws IOException{
-		Vector <News> news = Database.getInstance().getNews();
-		Collections.reverse(news);
-		while(true){
-			print("0. Exit");
-			int count = 1;
-			for(News cur: news){
-				print(count + "." + cur);
-				count++;
-			}
-			String ans = reader.readLine();
-			if(ans.equals("0")){
-				return;
-			}
-		}
-	}
+	public void viewNews() throws IOException {
+        while (true) {
+            Vector<News> news = Database.getInstance().getNews();
+            Collections.reverse(news);
+
+            print("0. Exit");
+            int count = 1;
+
+            for (News cur : news) {
+                print(count + "." + cur);
+                count++;
+            }
+
+            String ans = reader.readLine();
+            if (ans.equals("0")) {
+                return;
+            }
+
+        }
+    }
 
 	public void changePassword() throws IOException{
 		while(true){

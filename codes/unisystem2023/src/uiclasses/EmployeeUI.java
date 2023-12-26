@@ -43,9 +43,14 @@ public class EmployeeUI extends UserUI {
 		}
 	}
 
-	public void viewMessage(Message message) throws IOException{
-		print(message.getMessage());
+	public void viewMessage(Message message) throws IOException {
+	    if (message != null) {
+	        print(message.getMessage());
+	    } else {
+	        print("No messages yet");
+	    }
 	}
+
 
 	public void sendMessage() throws IOException{
 		System.out.println("Insert Employee's login to send message to: ");
@@ -70,14 +75,15 @@ public class EmployeeUI extends UserUI {
 		((Employee)user).sendMessage((Employee)receiver, theme, text);
 	}
 
+
+
+//я тут поменяла окда
 	public void researchersMenu() {
-	    Vector<Researcher> researchers = Database.getInstance().getResearchers();
-	    if (researchers.isEmpty()) {
-	        Employee employee = (Employee) user; // casting 'user' is an Employee type
-	        researchers.add(new Researcher(employee)); // Create a new Researcher instance using the employee
-	        Database.getInstance().setResearchers(researchers); // Set the updated list of researchers in the database
+	    if (Database.getInstance().getResearchers().isEmpty()) {
+	        Employee employee = (Employee) user;
+	        Database.getInstance().getResearchers().add(new Researcher(employee));
 	    }
-	    new ResearcherUI().main(); // Instantiate the ResearcherView and call its main method
+	    new ResearcherUI().main();
 	}
 
 
@@ -89,7 +95,7 @@ public class EmployeeUI extends UserUI {
 				print("2. Change password");
 				print("3. View messages");
 				print("4. Send message");
-				print("5. Researchers menu");
+				print("5. Researcher's options");
 				String ans = reader.readLine();
 				switch(ans){
 					case "0":

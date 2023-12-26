@@ -1,6 +1,8 @@
 package uiclasses;
 
 import java.io.IOException;
+import java.util.Vector;
+
 import unisystem2023.ResearchPaper;
 import users.Researcher;
 
@@ -17,69 +19,93 @@ public class ResearcherUI extends UserUI{
 	}
 
 	public void startResearch() throws IOException {
-		print("Insert the name of researching. '0' is exit");
-		String name = reader.readLine();
-		if(name.equals("0")) {
-			return;
-		}
-		print("Insert the theme of researching");
-		String theme = reader.readLine();
-		print("Insert the field of study");
-		String fieldStudy = reader.readLine();
-		
-		ResearchPaper paper = new ResearchPaper(name, theme, fieldStudy);
-		researcher.addResearch(paper);
-		print("Researching is started!");
+	    print("Insert the name of the research (Enter '0' to exit):");
+	    String name = reader.readLine();
+	    if (name.equals("0")) {
+	        return;
+	    }
+
+	    print("Insert the theme of the research:");
+	    String theme = reader.readLine();
+
+	    print("Insert the field of study:");
+	    String fieldStudy = reader.readLine();
+
+	    ResearchPaper paper = new ResearchPaper(name, theme, fieldStudy);
+	    researcher.addResearch(paper);
+	    print("Research started!");
 	}
+
 	
 	
 	
 	public void dropResearch() throws IOException {
-		print("Print the name of researching that you want to drop."
-				+ "'0' is exit.");
-		String name = reader.readLine();
-		if(name.equals("0")) {
-			return;
-		}
-		print("Print the theme of researching");
-		String theme = reader.readLine();
-		print("Print the field of study");
-		String fieldStudy = reader.readLine();
+	    print("Enter the name of the research you want to drop (Enter '0' to exit):");
+	    String name = reader.readLine();
+	    if (name.equals("0")) {
+	        return;
+	    }
 
-		ResearchPaper paper = new ResearchPaper(name, theme, fieldStudy);
-		researcher.dropResearch(paper);
-		print("Researching is dropped!");
+	    print("Enter the theme of the research:");
+	    String theme = reader.readLine();
+
+	    print("Enter the field of study:");
+	    String fieldStudy = reader.readLine();
+
+	    ResearchPaper paper = new ResearchPaper(name, theme, fieldStudy);
+	    researcher.dropResearch(paper);
+	    print("Research dropped successfully!");
 	}
-	public void viewResearch() throws IOException{
-		for(ResearchPaper paper: (researcher.getResearches())) {
-			print(paper.toString());
-		}
+	
+	
+	public void viewResearch() {
+	    try {
+	        Vector<ResearchPaper> researches = researcher.getResearches();
+	        if (researches.isEmpty()) {
+	            print("There are no research papers available.");
+	        } else {
+	            researches.forEach(paper -> {
+	                try {
+	                    print(paper.toString());
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                }
+	            });
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
-	public void finishResearch() throws IOException {
-		print("Print the name, theme and field of study of researching" +
-				"By the enter.");
-		String name = reader.readLine();
-		String theme = reader.readLine();
-		String fieldStudy = reader.readLine();
-		ResearchPaper needPaper = new ResearchPaper(name, theme, fieldStudy);
-		for(ResearchPaper paper: researcher.getResearches()) {
-			if(paper.equals(needPaper)) {
-				paper.finish();
-				print("The status of researching is finished.");
-				return;
-			}
-		}
-		print("Something is wrong");
+
+
+	public void publicResearch() throws IOException {
+	    print("Print the name, theme, and field of study of the research by entering each:");
+	    String name = reader.readLine();
+	    String theme = reader.readLine();
+	    String fieldStudy = reader.readLine();
+
+	    ResearchPaper needPaper = new ResearchPaper(name, theme, fieldStudy);
+
+	    for (ResearchPaper paper : researcher.getResearches()) {
+	        if (paper.equals(needPaper)) {
+	            paper.finish();
+	            print("The status of the research is finished.");
+	            return;
+	        }
+	    }
+
+	    print("Something is wrong");
 	}
+
 
 	public void main(){
 		while(true){
 			try{
 				print("0. Exit");
-				print("1. Start research");
-				print("2. Drop research");
-				print("3. View researches");
-				print("4. Finish research");
+				print("1. Start new research");
+				print("2. Delete research");
+				print("3. View all researches");
+				print("4. Public research");
 				String ans = reader.readLine();
 				switch(ans){
 					case "0":
@@ -94,7 +120,7 @@ public class ResearcherUI extends UserUI{
 						viewResearch();
 						break;
 					case "4":
-						finishResearch();
+						publicResearch();
 					default:
 						print("No such option");
 				}
