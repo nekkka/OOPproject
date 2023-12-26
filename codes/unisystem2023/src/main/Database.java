@@ -6,10 +6,13 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import java.util.stream.Collectors;
 import courses.Courses;
+import enums.OrderStatus;
 import unisystem2023.Message;
 import unisystem2023.News;
 import unisystem2023.ResearchPaper;
@@ -34,9 +37,8 @@ public final class Database implements Serializable {
     private Vector<Student> registeredStudents;
     private Vector<ResearchPaper> researchPapers;
     private Vector<Message> messages;
+    private static HashMap<String, OrderStatus> tasks;
    
-
-    // Private constructor for Singleton pattern
     private Database() {
         users = new Vector<>();
         employees = new Vector<>();
@@ -50,6 +52,7 @@ public final class Database implements Serializable {
         registeredStudents = new Vector <>();
         messages = new Vector <>();
         researchPapers = new Vector <>();
+        tasks = new HashMap<String, OrderStatus>();
     }
 
     public static Database getInstance() {
@@ -172,6 +175,17 @@ public final class Database implements Serializable {
     public void setNews(Vector<News> news) {
         this.news = news;
     }
+    
+    public void addTechSupportSpecialist(TechSupportSpecialist techSupportSpecialist) {
+        techSupportSpecialists.add(techSupportSpecialist);
+        users.add(techSupportSpecialist);
+    }
+
+    // Method to remove a TechSupportSpecialist from the database
+    public void removeTechSupportSpecialist(TechSupportSpecialist techSupportSpecialist) {
+        techSupportSpecialists.remove(techSupportSpecialist);
+        users.remove(techSupportSpecialist);
+    }
 
 
     // Add methods
@@ -239,6 +253,14 @@ public final class Database implements Serializable {
         fis.close();
         return system;
     }
+    
+    public Map<String, OrderStatus> getTasks() {
+        if (tasks == null) {
+            tasks = new HashMap<>();
+        }
+        return tasks;
+    }
+
     
     public List<Courses> getTeacherCourses(Teacher t){
     	return courses.stream().filter(c -> c.getLector().equals(t) || c.getPracticeTeacher().equals(t)).collect(Collectors.toList());

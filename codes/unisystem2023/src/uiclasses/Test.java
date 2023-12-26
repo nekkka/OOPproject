@@ -7,6 +7,7 @@ import users.Admin;
 import users.Manager;
 import users.Student;
 import users.Teacher;
+import users.TechSupportSpecialist;
 import users.User;
 public class Test {
     
@@ -25,6 +26,9 @@ public class Test {
         }
         if(user instanceof Manager){
         	consoleUI = new ManagerUI((Manager)user);
+        }
+        if(user instanceof TechSupportSpecialist){
+        	consoleUI = new TechSupportUI((TechSupportSpecialist)user);
         }
  
     }

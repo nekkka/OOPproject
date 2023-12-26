@@ -1,36 +1,35 @@
 package users;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 import enums.OrderStatus;
 import enums.UserRole;
+import main.Database;
 
 public class TechSupportSpecialist extends User implements Serializable {
     
- private static final long serialVersionUID = 1L;
- private boolean availability;
-    private Map<String, OrderStatus> tasks;
-    private static OrderStatus taskStatus = OrderStatus.NEW;
-    private List<String> skills;
-    static final UserRole role = UserRole.TECHSUPPORTSPECIALIST;
-    
-   
-    public TechSupportSpecialist() {
-        super();
-    }
-    public TechSupportSpecialist(String login, String password){
-		super(login, password);
-	}
+    private static final long serialVersionUID = 1L;
+    private static final UserRole role = UserRole.TECHSUPPORTSPECIALIST;
+    private boolean availability;
+    private OrderStatus taskStatus;
 
-    public static OrderStatus getTaskStatus() {
+    public TechSupportSpecialist() { 
+        super(); 
+    } 
+
+    public TechSupportSpecialist(String login, String password){ 
+        super(login, password); 
+    } 
+
+    public OrderStatus getTaskStatus() {
         return taskStatus;
     }
 
-    public static void setTaskStatus(OrderStatus newTaskStatus) {
-        taskStatus = newTaskStatus;
+    public void setTaskStatus(OrderStatus taskStatus) {
+        this.taskStatus = taskStatus;
     }
+
     public boolean isAvailability() {
         return availability;
     }
@@ -39,35 +38,18 @@ public class TechSupportSpecialist extends User implements Serializable {
         this.availability = availability;
     }
 
-    public Map<String, OrderStatus> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(Map<String, OrderStatus> tasks) {
-        this.tasks = tasks;
-    }
-
-    public List<String> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<String> skills) {
-        this.skills = skills;
-    }
-
-    // Methods implementation
-
     public void changeAvailability(boolean newAvailability) {
         this.availability = newAvailability;
         System.out.println("Availability changed to: " + newAvailability);
     }
 
-    public void addTasks(String taskName, OrderStatus status) {
-        tasks.put(taskName, status);
+    public void addTask(String taskName, OrderStatus taskStatus) {
+        Database.getInstance().getTasks().put(taskName, taskStatus);
         System.out.println("Task added: " + taskName);
     }
-
-    public void removeTasks(String taskName) {
+    
+    public void removeTask(String taskName) {
+        Map<String, OrderStatus> tasks = Database.getInstance().getTasks();
         if (tasks.containsKey(taskName)) {
             tasks.remove(taskName);
             System.out.println("Task removed: " + taskName);
@@ -76,21 +58,19 @@ public class TechSupportSpecialist extends User implements Serializable {
         }
     }
 
-    public void addSkills(String skill) {
-        skills.add(skill);
-        System.out.println("Skill added: " + skill);
-    }
-
     public void viewAllTasks() {
+        Map<String, OrderStatus> tasks = Database.getInstance().getTasks();
         if (tasks.isEmpty()) {
             System.out.println("No tasks assigned.");
         } else {
             System.out.println("Tasks:");
             for (Map.Entry<String, OrderStatus> entry : tasks.entrySet()) {
                 System.out.println("Task: " + entry.getKey() + ", Status: " + entry.getValue());
-                setTaskStatus(OrderStatus.SEEN);
             }
         }
     }
 
+    public UserRole getRole() {
+        return role;
+    }
 }

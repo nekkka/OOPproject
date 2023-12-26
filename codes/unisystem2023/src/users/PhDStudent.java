@@ -35,10 +35,12 @@ public class PhDStudent extends Student implements CanBeResearcher {
         // TODO: Implement method for teaching as a practicant
     }
     
-    public String writeDiploma() {
-        // TODO: Implement method for writing diploma
-        return ""; // Placeholder return statement, modify as per implementation
+    public String writeDiploma(String topic, String sphere) {
+        String diplomaText = "Writing the diploma on the topic '" + topic + "' in the sphere of '" + sphere + "'.";
+
+        return diplomaText;
     }
+
     
     public Researcher becomeaResearcher(){
 		return new Researcher(this);
