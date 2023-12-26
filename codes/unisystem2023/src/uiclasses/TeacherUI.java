@@ -179,7 +179,7 @@ public class TeacherUI extends EmployeeUI{
 				print("4. Send message");
 				print("5. View courses");
                 print("6. Put mark");
-                print("7. Researcher's options");
+                print("7. Become a reseracher");
 				String ans = reader.readLine();
 				switch(ans){
 					case "0":

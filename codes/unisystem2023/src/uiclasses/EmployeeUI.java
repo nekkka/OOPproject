@@ -95,7 +95,7 @@ public class EmployeeUI extends UserUI {
 				print("2. Change password");
 				print("3. View messages");
 				print("4. Send message");
-				print("5. Researcher's options");
+				print("5. Become a researcher");
 				String ans = reader.readLine();
 				switch(ans){
 					case "0":

@@ -46,7 +46,7 @@ public class StudentUI extends UserUI {
             for (Courses c : registration) {
                 System.out.println(c.toString());
             }
-            System.out.println("Insert name of course you want to register or 0 to exit");
+            System.out.println("Insert name of course you want to register. Insert 0 to exit");
             final String courseString = reader.readLine();
             if (courseString.equals("0")) {
                 return;
@@ -56,9 +56,9 @@ public class StudentUI extends UserUI {
                         .filter(c -> c.getCoursesName().equals(courseString))
                         .collect(Collectors.toList()).get(0);
                 if (((Student) user).register(course)) {
-                    System.out.println("Registered successfully");
+                    System.out.println("Register was successfull");
                 } else {
-                    System.out.println("Cannot register");
+                    System.out.println("Can't register");
                 }
             } catch (IndexOutOfBoundsException ioobe) {
                 System.out.println("No such course");
@@ -79,7 +79,7 @@ public class StudentUI extends UserUI {
             for (Courses cur : courses) {
                 System.out.println(cur.toString());
             }
-            System.out.println("Insert name of course you want to drop or 0 to exit");
+            System.out.println("Insert name of course you want to drop. Insert 0 to exit");
             final String ans = reader.readLine();
             if (ans.equals("0")) {
                 return;
@@ -124,7 +124,7 @@ public class StudentUI extends UserUI {
                 System.out.println("4. Register to a course");
                 System.out.println("5. Drop course");
                 System.out.println("6. View marks");
-                System.out.println("8. Researcher's options");
+                System.out.println("8. Become a researcher");
                 String ans = reader.readLine();
                 switch (ans) {
                     case "0":

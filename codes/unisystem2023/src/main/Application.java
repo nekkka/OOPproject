@@ -3,7 +3,6 @@ package main;
 import java.util.Scanner;
 
 import uiclasses.UserUI;
-import users.Admin;
 import users.User;
 
 public class Application {

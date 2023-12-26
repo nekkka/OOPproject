@@ -8,6 +8,7 @@ import courses.Courses;
 import enums.Faculty;
 import enums.OrganizationName;
 import enums.UserRole;
+import main.Database;
 import unisystem2023.Mark;
 
 
@@ -154,11 +155,16 @@ public class Student extends User implements CanBeResearcher, Serializable {
 
     
     public void dropCourse(Courses course) {
-        // Implementation of dropCourse method
-        // Drop the specified course from the student's registered courses
-        // You need to add appropriate logic to remove the course from the student's registered courses
+        Database database = Database.getInstance();
+        if (database.getCourses().contains(course)) {
+            database.deleteCourse(course);
+            courses.remove(course);
+            /*System.out.println("Course '" + course.getCoursesName() + "' removed successfully.");
+        } else {
+            System.out.println("Course '" + course.getCoursesName() + "' not found in the database.");
+        }*/
     }
-    
+}
 
 
     public void viewTeachers() {

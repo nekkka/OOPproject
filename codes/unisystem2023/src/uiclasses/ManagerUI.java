@@ -221,12 +221,41 @@ public class ManagerUI extends EmployeeUI{
 	        }
 
 	        System.out.println("Teachers assigned to the course successfully.");
+	        Database.getInstance().setTeachers(availableTeachers);
 	    } else {
 	        System.out.println("Invalid course number. Please enter a valid course number.");
 	    }
 	}
+  
+  public void viewTeachersCourse() {
+	    Vector<Courses> courses = Database.getInstance().getCourses();
 
+	    if (courses.isEmpty()) {
+	        System.out.println("No courses available.");
+	    } else {
+	        for (Courses course : courses) {
+	            String courseName = course.getCoursesName();
+	            Teacher lector = course.getLector();
+	            Teacher practiceTeacher = course.getPracticeTeacher();
 
+	            System.out.println("Course: " + courseName);
+
+	            if (lector != null) {
+	                System.out.println("Lector: " + lector.getName());
+	            } else {
+	                System.out.println("Lector: Not assigned");
+	            }
+
+	            if (practiceTeacher != null) {
+	                System.out.println("Practice Teacher: " + practiceTeacher.getName());
+	            } else {
+	                System.out.println("Practice Teacher: Not assigned");
+	            }
+
+	            System.out.println();
+	        }
+	    }
+	}
 
 
   public void main() {
@@ -237,13 +266,12 @@ public class ManagerUI extends EmployeeUI{
 	            print("2. Change password");
 	            print("3. View messages");
 	            print("4. Send message");
-	            print("5. Researchers menu");
-	            print("6. Delete course");
-	            print("7. Add course");
-	            print("8. View courses");
-	            print("9. View teacher's courses");
-	            print("10. Add news");
-	            print("11. Assign Teachers to course");
+	            print("5. Delete course");
+	            print("6. Add course");
+	            print("7. View courses");
+	            print("8. View teacher's courses");
+	            print("9. Add news");
+	            print("10. Assign Teachers to course");
 	            String ans = reader.readLine();
 	            switch (ans) {
 	                case "0":
@@ -261,24 +289,21 @@ public class ManagerUI extends EmployeeUI{
 	                    sendMessage();
 	                    break;
 	                case "5":
-	                    researchersMenu();
-	                    break;
-	                case "6":
 	                    deleteCourse();
 	                    break;
-	                case "7":
+	                case "6":
 	                    addCourse();
 	                    break;
-	                case "8":
+	                case "7":
 	                    viewCourses(); 
 	                    break;
-	                case "9":
-	                    manager.viewTeachersCourse(); 
+	                case "8":
+	                    viewTeachersCourse(); 
 	                    break;	                    
-	                case "10":
+	                case "9":
 	                    addNews(); 
 	                    break;
-	                case "11":
+	                case "10":
 	                	assignTeacherToCourse();
 	                    break;    
 	                    

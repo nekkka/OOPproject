@@ -2,7 +2,6 @@ package main;
 
 import java.io.*;
 import java.util.List;
-import java.util.Set;
 import java.util.Vector;
 import java.util.stream.Collectors;
 
@@ -44,7 +43,9 @@ public final class Database implements Serializable {
         techSupportSpecialists = new Vector<>();
         news = new Vector<>();
         researchers = new Vector<>();
-        registeredStudents = new Vector <Student>();
+        registeredStudents = new Vector <>();
+        messages = new Vector <>();
+        researchPapers = new Vector <>();
     }
 
     public static Database getInstance() {

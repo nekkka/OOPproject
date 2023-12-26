@@ -60,11 +60,8 @@ public class Manager extends Employee{
         }
     }
     
-
-    public Vector <Courses> viewTeachersCourse() {
-        //TODO
-        return null;
-    }
+    
+   
     
     public void openRegistrationForCourse(Courses course) {
         course.setRegistrationOpen(true); // Открыть регистрацию для курса
