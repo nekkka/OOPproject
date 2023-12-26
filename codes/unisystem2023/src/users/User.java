@@ -31,6 +31,13 @@ public abstract class User implements Serializable {
         Database.getInstance().addUser(this);
 	}
     
+    public User(String login, String password, String name) {
+    	this.login = login;
+        this.password = password;
+        this.name = name;
+        Database.getInstance().addUser(this);
+	}
+    
     
     public User (Long id, String login, String password, String name, String surname, String phoneNumber, String email) {
         this.id = id;

@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import uiclasses.UserUI;
 import users.Admin;
-import users.Researcher;
 import users.User;
 
 public class Application {
@@ -17,8 +16,10 @@ public class Application {
 		User user = Database.getInstance().getUser(login, password);
 		UserUI ui = UIFactory.getUi(user);
 		ui.main();
-		
-		
+	/*	Admin admin = new Admin("admin", "admin"); // Create Admin object
+        Database.getInstance().addUser(admin);
+        Database.saveDB();
+        System.out.println("Done");*/
 		
 	}
 

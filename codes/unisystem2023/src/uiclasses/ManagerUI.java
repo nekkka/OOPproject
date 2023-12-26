@@ -5,6 +5,7 @@ import java.util.Vector;
 import java.util.stream.Collectors;
 
 import courses.Courses;
+import enums.Faculty;
 import main.Database;
 import unisystem2023.Message;
 import users.Employee;
@@ -74,6 +75,59 @@ public class ManagerUI extends EmployeeUI{
     String text = reader.readLine();
     ((Manager)user).sendMessage((Manager)receiver, theme, text);
   }
+  
+  public void addCourse() throws IOException {
+	    while (true) {
+	        print("Insert course idCode or 0 to exit: ");
+	        String idCode = reader.readLine();
+	        if (idCode.equals("0")) {
+	            return;
+	        }
+
+	        print("Insert number of credits for the course:");
+	        int credits = Integer.parseInt(reader.readLine());
+
+	        print("Insert course name:");
+	        String name = reader.readLine();
+
+	        print("Insert faculty:\nSITE\nBS\nISE\nSAM");
+	        String facultyInput = reader.readLine();
+	        Faculty faculty = Faculty.valueOf(facultyInput);
+
+	        try {
+	            Courses course = new Courses(name, idCode, credits, faculty);
+	            Database.getInstance().addCourse(course);
+	            print("Course created successfully");
+	        } catch (Exception e) {
+	            print("Something went wrong while creating the course.");
+	            e.printStackTrace();
+	        }
+	    }
+	}
+  
+  
+  public void deleteCourse() throws IOException {
+	    while (true) {
+	        print("Select a course to delete or enter 0 to exit:");
+	        Vector<Courses> courses = Database.getInstance().getCourses();
+	        for (int i = 0; i < courses.size(); i++) {
+	            print((i + 1) + ". " + courses.get(i));
+	        }
+	        int choice = Integer.parseInt(reader.readLine());
+
+	        if (choice == 0) {
+	            return;
+	        } else if (choice > 0 && choice <= courses.size()) {
+	            Courses courseToDelete = courses.get(choice - 1);
+	            Database.getInstance().deleteCourse(courseToDelete);
+	            print("Course deleted successfully");
+	        } else {
+	            print("Invalid choice. Please select a valid option.");
+	        }
+	    }
+	}
+
+
 
   public void researchersMenu() {
       Vector<Researcher> researchers = Database.getInstance().getResearchers();
@@ -84,54 +138,74 @@ public class ManagerUI extends EmployeeUI{
       }
       new ResearcherUI().main(); // Instantiate the ResearcherView and call its main method
   }
+  
+  public void viewCourses() throws IOException {
+	    Vector<Courses> courses = Database.getInstance().getCourses();
+	    if (courses.isEmpty()) {
+	        System.out.println("No courses");
+	        return;
+	    }
 
-
-  public void main(){
-    while(true){
-      try{
-        print("0. Exit");
-        print("1. View news");
-        print("2. Change password");
-        print("3. View messages");
-        print("4. Send message");
-        print("5. Researchers menu");
-        print("6. Delete course");
-        print("7. Add course");
-        print("8. View course");
-        print("9. View teacher's couses");
-        String ans = reader.readLine();
-        switch(ans){
-          case "0":
-            return;
-          case "1":
-            viewNews();
-            break;
-          case "2":
-            changePassword();
-            break;
-          case "3":
-            viewMessages();
-            break;
-          case "4":
-            sendMessage();
-            break;
-          case "5":
-            researchersMenu();
-          case "6":
-            manager.deleteCourse(Courses course,Teacher teacher);
-          case "7":
-            manager.addCourses();
-          case "8":
-            manager.viewCourses();
-          case "9":
-            manager.viewTeachersCourse();
-          default:
-            print("No such option");
+	    System.out.println("Courses:\n");
+        for (int i = 0; i < courses.size(); i++) {
+            print((i + 1) + ". " + courses.get(i));
         }
-      }
-      catch (IOException ioe){
-        System.out.println("Error");
-      }
-    }
-  }
+	}
+
+
+
+  public void main() {
+	    while (true) {
+	        try {
+	            print("0. Exit");
+	            print("1. View news");
+	            print("2. Change password");
+	            print("3. View messages");
+	            print("4. Send message");
+	            print("5. Researchers menu");
+	            print("6. Delete course");
+	            print("7. Add course");
+	            print("8. View course");
+	            print("9. View teacher's courses");
+	            String ans = reader.readLine();
+	            switch (ans) {
+	                case "0":
+	                    return;
+	                case "1":
+	                    viewNews();
+	                    break;
+	                case "2":
+	                    changePassword();
+	                    break;
+	                case "3":
+	                    viewMessages();
+	                    break;
+	                case "4":
+	                    sendMessage();
+	                    break;
+	                case "5":
+	                    researchersMenu();
+	                    break;
+	                case "6":
+	                    deleteCourse();
+	                    break;
+	                case "7":
+	                    addCourse();
+	                    break;
+	                case "8":
+	                    viewCourses(); // Call viewCourses() using the instance variable 'manager'
+	                    break;
+	                case "9":
+	                    manager.viewTeachersCourse(); // Call viewTeachersCourse() using the instance variable 'manager'
+	                    break;
+	                default:
+	                    print("No such option");
+	                    break;
+	            }
+	        } catch (IOException ioe) {
+	            System.out.println("Error");
+	        }
+	    }
+	}
+
 }

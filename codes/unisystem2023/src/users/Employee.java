@@ -17,6 +17,10 @@ public abstract class Employee extends User implements CanBeResearcher{
     public Employee(String login, String password){
 		super(login, password);
 	}
+    
+  /*  public Employee(String login, String password, String name){
+		super(login, password, name);
+	}*/
 
     public Employee(Long id, String login, String password, String name, String surname, String phoneNumber, String email, double salary) {
         super(id, login, password, name, surname, phoneNumber, email);

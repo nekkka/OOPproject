@@ -29,6 +29,13 @@ public class Courses implements Serializable {
         this.id = id;
         this.credits = credits;
     }
+    
+    public Courses(String coursesName, String id, int credits, Faculty faculty) {
+        this.courseName = coursesName;
+        this.id = id;
+        this.credits = credits;
+        this.faculty = faculty;
+    }
 
     public Courses(String courseName, String id, int credits, CoursesType courseType,
                    Semester semester, Teacher lector, Teacher practice, Faculty faculty) {
@@ -130,6 +137,6 @@ public class Courses implements Serializable {
     }*/
 
     public String toString() {
-        return "Course's name: " + courseName + ", credits: " + credits + ", ID code: " + id + ' ';
+        return "Course's name: " + courseName + ", credits: " + credits + ", ID code: " + id + " Faculy:" + faculty;
     }
 }

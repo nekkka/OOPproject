@@ -32,20 +32,15 @@ public class Manager extends Employee{
         this.type = type;
     }
     
+    public void CourseToLector(Courses course, Teacher teacher) {
+    	course.setLector(teacher);	
+	}
+	
+	public void CourseToPracticer(Courses course, Teacher teacher){
+		course.setPracticeTeacher(teacher);
+	}
+    
 
-    public void deleteCourse(Courses course, Teacher teacher) {
-        if (Database.getInstance().getCourses().contains(course) && Database.getInstance().getTeacherCourses(teacher).contains(course)) {
-            Database.getInstance().deleteCourse(course);
-            System.out.println("Course deleted successfully");
-        } else {
-            System.out.println("Course not found");
-        }
-    }
-
-    public void addCourses(Courses course, Teacher teacher) {
-        Database.getInstance().addCourse(course);
-        System.out.println("Course added successfully");
-    }
 
     public Vector<Courses> viewCourses() {
         return Database.getInstance().getCourses();

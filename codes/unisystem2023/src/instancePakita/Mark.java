@@ -1,4 +1,4 @@
-package instance;
+package instancePakita;
 
 import java.io.Serializable;
 

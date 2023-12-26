@@ -7,8 +7,8 @@ import java.util.Vector;
 import java.util.stream.Collectors;
 
 import courses.Courses;
+import unisystem2023.Message;
 import unisystem2023.News;
-import unisystem2023.Request;
 import unisystem2023.ResearchPaper;
 import users.*;
 
@@ -30,6 +30,7 @@ public final class Database implements Serializable {
     private Vector<Researcher> researchers;
     private Vector<Student> registeredStudents;
     private Vector<ResearchPaper> researchPapers;
+    private Vector<Message> messages;
    
 
     // Private constructor for Singleton pattern
@@ -48,7 +49,7 @@ public final class Database implements Serializable {
 
     public static Database getInstance() {
         if (instance == null) {
-            if (new File("datas.ser").exists()) {
+            if (new File("ourbd.ser").exists()) {
                 try {
                     instance = readDB();
                 } catch (Exception e) {
@@ -73,6 +74,9 @@ public final class Database implements Serializable {
                 .findFirst()
                 .orElse(null);
     }
+    //гет юзер с именем сделать
+    
+    
     public Vector<Employee> getEmployees() {
         return employees;
     }
@@ -215,7 +219,7 @@ public final class Database implements Serializable {
 
     // Save and read database methods
     private static synchronized Database readDB() throws Exception {
-        FileInputStream fis = new FileInputStream("datas.ser");
+        FileInputStream fis = new FileInputStream("ourbd.ser");
         ObjectInputStream ois = new ObjectInputStream(fis);
         Database system = (Database) ois.readObject();
         ois.close();
@@ -224,7 +228,7 @@ public final class Database implements Serializable {
     }
 
     public static synchronized void saveDB() throws Exception {
-        FileOutputStream fos = new FileOutputStream("datas.ser");
+        FileOutputStream fos = new FileOutputStream("ourbd.ser");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(instance);
         oos.close();
