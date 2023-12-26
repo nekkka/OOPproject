@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
 import java.util.stream.Collectors;
-
 import courses.Courses;
 import unisystem2023.Message;
 import unisystem2023.News;
