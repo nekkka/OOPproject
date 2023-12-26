@@ -1,6 +1,8 @@
 package uiclasses;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Vector;
 import java.util.stream.Collectors;
 
@@ -8,6 +10,7 @@ import courses.Courses;
 import enums.Faculty;
 import main.Database;
 import unisystem2023.Message;
+import unisystem2023.News;
 import users.Employee;
 import users.Manager;
 import users.Researcher;
@@ -49,18 +52,15 @@ public class ManagerUI extends EmployeeUI{
     }
   }
 
-  public void viewMessage(Message message) throws IOException{
-    print(message.getMessage());
-  }
 
   public void sendMessage() throws IOException{
-    System.out.println("Insert Manager's login to send message to: ");
+    System.out.println("Write User's login to send message: ");
     User receiver;
     String name = reader.readLine();
     while(true){
       try{
         receiver = Database.getInstance().getAllUsers().stream()
-        .filter(u-> u instanceof Manager)
+       // .filter(u-> u instanceof User) ?????? нада обдумать нормски
         .filter(e -> e.getLogin().equals(name))
         .collect(Collectors.toList()).get(0);
         break;
@@ -151,6 +151,62 @@ public class ManagerUI extends EmployeeUI{
             print((i + 1) + ". " + courses.get(i));
         }
 	}
+  
+  
+  public void addNews() throws IOException {
+	    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	    
+	    System.out.println("Enter news title:");
+	    String newsTitle = reader.readLine();
+	    
+	    System.out.println("Enter news content:");
+	    String content = reader.readLine();
+	    
+	    News newsItem = new News(newsTitle, content);
+	    Database.getInstance().addNews(newsItem);
+	    
+	    System.out.println("News added successfully");
+	}
+  
+  
+  
+  
+  
+  
+  public void assignTeacherToCourse() throws IOException {
+	    Vector<Courses> courses = Database.getInstance().getCourses();
+	    if (courses.isEmpty()) {
+	        System.out.println("No courses available to assign teachers");
+	        return;
+	    }
+
+	    System.out.println("Available Courses:");
+	    for (int i = 0; i < courses.size(); i++) {
+	        System.out.println((i + 1) + ". " + courses.get(i));
+	    }
+
+	    System.out.println("Enter the number of the course to assign teachers:");
+	    int courseNumber = Integer.parseInt(reader.readLine());
+
+	    if (courseNumber > 0 && courseNumber <= courses.size()) {
+	        Courses selectedCourse = courses.get(courseNumber - 1);
+	        Teacher lector = null;
+	        Teacher practiceTeacher = null;
+
+	    
+	        System.out.println("Select lector for the course:");
+	        System.out.println("Select practice teacher for the course:");
+	        if (lector != null && practiceTeacher != null) {
+	            selectedCourse.setLector(lector);
+	            selectedCourse.setPracticeTeacher(practiceTeacher);
+	            System.out.println("Teachers assigned to the course successfully.");
+	        } else {
+	            System.out.println("Unable to assign teachers. Please make sure teachers are selected.");
+	        }
+	    } else {
+	        System.out.println("Invalid course number. Please enter a valid course number.");
+	    }
+	}
 
 
 
@@ -165,8 +221,10 @@ public class ManagerUI extends EmployeeUI{
 	            print("5. Researchers menu");
 	            print("6. Delete course");
 	            print("7. Add course");
-	            print("8. View course");
+	            print("8. View courses");
 	            print("9. View teacher's courses");
+	            print("10. Add news");
+	            print("11. Assign Teachers to course");
 	            String ans = reader.readLine();
 	            switch (ans) {
 	                case "0":
@@ -193,11 +251,18 @@ public class ManagerUI extends EmployeeUI{
 	                    addCourse();
 	                    break;
 	                case "8":
-	                    viewCourses(); // Call viewCourses() using the instance variable 'manager'
+	                    viewCourses(); 
 	                    break;
 	                case "9":
-	                    manager.viewTeachersCourse(); // Call viewTeachersCourse() using the instance variable 'manager'
+	                    manager.viewTeachersCourse(); 
+	                    break;	                    
+	                case "10":
+	                    addNews(); 
 	                    break;
+	                case "11":
+	                	assignTeacherToCourse();
+	                    break;    
+	                    
 	                default:
 	                    print("No such option");
 	                    break;

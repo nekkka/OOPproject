@@ -39,8 +39,6 @@ public class Manager extends Employee{
 	public void CourseToPracticer(Courses course, Teacher teacher){
 		course.setPracticeTeacher(teacher);
 	}
-    
-
 
     public Vector<Courses> viewCourses() {
         return Database.getInstance().getCourses();
