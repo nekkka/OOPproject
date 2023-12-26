@@ -1,6 +1,11 @@
 package main;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
 import java.util.stream.Collectors;
@@ -218,15 +223,7 @@ public final class Database implements Serializable {
         news.remove(newsItem);
     }
 
-    // Save and read database methods
-    private static synchronized Database readDB() throws Exception {
-        FileInputStream fis = new FileInputStream("ourbd.ser");
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        Database system = (Database) ois.readObject();
-        ois.close();
-        fis.close();
-        return system;
-    }
+   
 
     public static synchronized void saveDB() throws Exception {
         FileOutputStream fos = new FileOutputStream("ourbd.ser");
@@ -234,6 +231,14 @@ public final class Database implements Serializable {
         oos.writeObject(instance);
         oos.close();
         fos.close();
+    }
+    private static synchronized Database readDB() throws Exception {
+        FileInputStream fis = new FileInputStream("ourbd.ser");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        Database system = (Database) ois.readObject();
+        ois.close();
+        fis.close();
+        return system;
     }
     
     public List<Courses> getTeacherCourses(Teacher t){

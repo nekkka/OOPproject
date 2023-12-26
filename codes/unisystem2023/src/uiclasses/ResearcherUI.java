@@ -30,8 +30,11 @@ public class ResearcherUI extends UserUI{
 
 	    print("Insert the field of study:");
 	    String fieldStudy = reader.readLine();
+	    
+	    print("Insert the doi of research paper:");
+	    String doi = reader.readLine();
 
-	    ResearchPaper paper = new ResearchPaper(name, theme, fieldStudy);
+	    ResearchPaper paper = new ResearchPaper(name, theme, fieldStudy, doi);
 	    researcher.addResearch(paper);
 	    print("Research started!");
 	}
@@ -51,8 +54,11 @@ public class ResearcherUI extends UserUI{
 
 	    print("Enter the field of study:");
 	    String fieldStudy = reader.readLine();
+	    
+	    print("Enter the doi of research paper:");
+	    String doi = reader.readLine();
 
-	    ResearchPaper paper = new ResearchPaper(name, theme, fieldStudy);
+	    ResearchPaper paper = new ResearchPaper(name, theme, fieldStudy, doi);
 	    researcher.dropResearch(paper);
 	    print("Research dropped successfully!");
 	}
@@ -83,8 +89,9 @@ public class ResearcherUI extends UserUI{
 	    String name = reader.readLine();
 	    String theme = reader.readLine();
 	    String fieldStudy = reader.readLine();
+	    String doi = reader.readLine();
 
-	    ResearchPaper needPaper = new ResearchPaper(name, theme, fieldStudy);
+	    ResearchPaper needPaper = new ResearchPaper(name, theme, fieldStudy, doi);
 
 	    for (ResearchPaper paper : researcher.getResearches()) {
 	        if (paper.equals(needPaper)) {

@@ -11,16 +11,19 @@ public class ResearchPaper implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private boolean finished;
-	private String theme;
-	private String fieldOfStudy;
+	private String topic;
+	private String studyField;
+	private String doi;
+	
 
 	public ResearchPaper(){
 		super();
 	}
-	public ResearchPaper(String name, String theme, String fieldOfStudy) {
+	public ResearchPaper(String name, String topic, String studyField, String doi) {
 		this.name = name;
-		this.theme = theme;
-		this.fieldOfStudy = fieldOfStudy;
+		this.topic = topic;
+		this.studyField = studyField;
+		this.doi = doi;
 	}
 	public String getName() {
 		return name;
@@ -28,11 +31,11 @@ public class ResearchPaper implements Serializable{
 	public boolean isFinished() {
 		return finished;
 	}
-	public String getTheme() {
-		return theme;
+	public String gettopic() {
+		return topic;
 	}
-	public String getFieldOfStudy() {
-		return fieldOfStudy;
+	public String getstudyField() {
+		return studyField;
 	}
 	public boolean equals(Object o) {
 		if(o == null) {return false;}
@@ -40,18 +43,24 @@ public class ResearchPaper implements Serializable{
 		if(this.getClass() != o.getClass()) {return false;}
 		ResearchPaper r = (ResearchPaper) o;
 		return this.name.equals(r.name) && finished == r.finished
-				&& this.fieldOfStudy.equals(r.fieldOfStudy) && this.theme.equals(r.theme);
+				&& this.studyField.equals(r.studyField) && this.topic.equals(r.topic);
 	}
 	public int hashCode() {
-		return Objects.hash(name, finished, fieldOfStudy, theme);	
+		return Objects.hash(name, finished, studyField, topic);	
 	}
 	public String toString() {
 		return "Research paper's name: " + name
-				+ ", The field of study: " + fieldOfStudy + "Paper's theme:" + theme;
+				+ ", The field of study: " + studyField + "Paper's topic:" + topic;
 	}
 
 	public void finish(){
 		finished = true;
+	}
+	public String getDoi() {
+		return doi;
+	}
+	public void setDoi(String doi) {
+		this.doi = doi;
 	}
 
 
