@@ -112,7 +112,7 @@ public class ResearcherUI extends UserUI{
 				print("1. Start new research");
 				print("2. Delete research");
 				print("3. View all researches");
-				print("4. Public research");
+				print("4. Public research. Print papers");
 				String ans = reader.readLine();
 				switch(ans){
 					case "0":
