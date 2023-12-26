@@ -38,6 +38,9 @@ public final class Database implements Serializable {
     private Vector<ResearchPaper> researchPapers;
     private Vector<Message> messages;
     private static HashMap<String, OrderStatus> tasks;
+    private HashMap<Courses,Teacher> teacherToCourse;
+    private HashMap<Teacher, int[]> teacherRatings;
+    
    
     private Database() {
         users = new Vector<>();
@@ -53,7 +56,38 @@ public final class Database implements Serializable {
         messages = new Vector <>();
         researchPapers = new Vector <>();
         tasks = new HashMap<String, OrderStatus>();
+        teacherToCourse = new HashMap<>();
+        teacherRatings = new HashMap<>();
     }
+    public void setTeacherRatings(Teacher teacher, int rate) {
+        // Check if the teacherRatings map is null and initialize it if needed
+        if (teacherRatings == null) {
+            teacherRatings = new HashMap<>();
+        }
+        
+        // Check if the teacher is already in the map
+        if (teacherRatings.containsKey(teacher)) {
+            // If yes, update the sum and counter
+            int[] ratings = teacherRatings.get(teacher);
+            ratings[0] += rate; // Update the sum
+            ratings[1] += 1;    // Increment the counter
+        } else {
+            // If no, create a new array with the rate and counter and put it in the map
+            int[] ratings = {rate, 1};
+            teacherRatings.put(teacher, ratings);
+        }
+    }
+
+
+    public double getAverageRating(Teacher teacher) {
+        if (teacherRatings.containsKey(teacher)) {
+            int[] ratings = teacherRatings.get(teacher);
+            return (double) ratings[0] / ratings[1];
+        } else {
+            return 0.0; // or -1.0 or any other default value as per your requirement
+        }
+    }
+
 
     public static Database getInstance() {
         if (instance == null) {
@@ -74,6 +108,13 @@ public final class Database implements Serializable {
     // Getter methods
     public Vector<User> getAllUsers() {
         return users;
+    }
+    
+    public void setTeacherToCourse(Courses course,Teacher teacher, HashMap<Courses,Teacher> teacherToCourse) {
+    	teacherToCourse.put(course, teacher);
+    }
+    public HashMap<Courses,Teacher> someMethod() {
+    	return teacherToCourse;
     }
     
     public User getUser(String login, String password) {

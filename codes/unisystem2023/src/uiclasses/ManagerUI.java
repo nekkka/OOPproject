@@ -3,6 +3,7 @@ package uiclasses;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.Vector;
 import java.util.stream.Collectors;
 
@@ -203,7 +204,8 @@ public class ManagerUI extends EmployeeUI{
 	        int lectorNumber = Integer.parseInt(reader.readLine());
 	        if (lectorNumber > 0 && lectorNumber <= availableTeachers.size()) {
 	            Teacher lector = availableTeachers.get(lectorNumber - 1);
-	            selectedCourse.setLector(lector);
+	            HashMap<Courses,Teacher> teacherTocourse = Database.getInstance().someMethod();
+	            Database.getInstance().setTeacherToCourse(selectedCourse, lector, teacherTocourse);
 	        } else {
 	            System.out.println("Invalid lector number.");
 	            return;
@@ -256,6 +258,56 @@ public class ManagerUI extends EmployeeUI{
 	        }
 	    }
 	}
+  
+  public double getAverageRating() throws NumberFormatException, IOException {
+	    Vector<Teacher> availableTeachers = Database.getInstance().getTeachers();
+	    if (availableTeachers.isEmpty()) {
+	        System.out.println("No teachers available to assign");
+	        return 0;
+	    }
+
+	    System.out.println("Available Teachers:");
+	    for (int i = 0; i < availableTeachers.size(); i++) {
+	        System.out.println((i + 1) + ". " + availableTeachers.get(i).getLogin());
+	    }
+
+	    int lectorNumber;
+	    while (true) {
+	        try {
+	            System.out.println("Enter the number of the teacher to get their average rating:");
+	            lectorNumber = Integer.parseInt(reader.readLine());
+	            if (lectorNumber > 0 && lectorNumber <= availableTeachers.size()) {
+	                break;
+	            } else {
+	                System.out.println("Invalid teacher number. Please enter a valid teacher number.");
+	            }
+	        } catch (NumberFormatException e) {
+	            System.out.println("Invalid input. Please enter a number.");
+	        }
+	    }
+
+	    Teacher lector = availableTeachers.get(lectorNumber - 1);
+
+	    // Get the average rating using the Database method
+	    double averageRating = 0.0; // Default value
+
+	    try {
+	        averageRating = Database.getInstance().getAverageRating(lector);
+	        if (averageRating > 0) {
+	            System.out.println("Average rating for " + lector.getLogin() + ": " + averageRating);
+	        } else {
+	            System.out.println("No rating available for " + lector.getLogin());
+	        }
+	    } catch (NullPointerException ex) {
+	        System.out.println("Error: Unable to retrieve the average rating. The rating system might be unavailable.");
+	        ex.printStackTrace(); // Handle or log the exception based on your requirements
+	    }
+
+	    return averageRating;
+	}
+
+
+
 
 
   public void main() {
@@ -272,6 +324,7 @@ public class ManagerUI extends EmployeeUI{
 	            print("8. View teacher's courses");
 	            print("9. Add news");
 	            print("10. Assign Teachers to course");
+	            print("11. Get teacher rating");
 	            String ans = reader.readLine();
 	            switch (ans) {
 	                case "0":
@@ -305,7 +358,10 @@ public class ManagerUI extends EmployeeUI{
 	                    break;
 	                case "10":
 	                	assignTeacherToCourse();
-	                    break;    
+	                    break;
+	                case "11":
+	                	getAverageRating();
+	                    break;
 	                    
 	                default:
 	                    print("No such option");

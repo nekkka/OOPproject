@@ -2,14 +2,17 @@ package users;
 
 import java.io.Serializable;
 
-import courses.Courses;
 import enums.Faculty;
 import enums.OrganizationName;
 import main.Database;
-import unisystem2023.Mark;
-import users.Student;
+
 
 public class StudentTest implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static void main(String[] args) {
 	    Database database = Database.getInstance();
 	    Student student = (Student) database.getUser("a_nuriyeva@kbtu.kz", "parol");

@@ -9,6 +9,7 @@ import main.Database;
 import courses.Courses;
 import users.Researcher;
 import users.Student;
+import users.Teacher;
 
 public class StudentUI extends UserUI {
 
@@ -46,7 +47,7 @@ public class StudentUI extends UserUI {
             for (Courses c : registration) {
                 System.out.println(c.toString());
             }
-            System.out.println("Insert name of course you want to register. Insert 0 to exit");
+            System.out.println("Insert name of course you want to register or 0 to exit");
             final String courseString = reader.readLine();
             if (courseString.equals("0")) {
                 return;
@@ -56,9 +57,9 @@ public class StudentUI extends UserUI {
                         .filter(c -> c.getCoursesName().equals(courseString))
                         .collect(Collectors.toList()).get(0);
                 if (((Student) user).register(course)) {
-                    System.out.println("Register was successfull");
+                    System.out.println("Registered successfully");
                 } else {
-                    System.out.println("Can't register");
+                    System.out.println("Cannot register");
                 }
             } catch (IndexOutOfBoundsException ioobe) {
                 System.out.println("No such course");
@@ -68,7 +69,7 @@ public class StudentUI extends UserUI {
 
     public void viewMarks() throws IOException {
         for (Courses c : ((Student) user).getCourses().keySet()) {
-            System.out.println(c.toString() + "\n"+ ((Student) user).getCurrentMarks().get(c).toString());
+            System.out.println(c.toString() + ((Student) user).getCurrentMarks().get(c).toString());
         }
     }
 
@@ -79,7 +80,7 @@ public class StudentUI extends UserUI {
             for (Courses cur : courses) {
                 System.out.println(cur.toString());
             }
-            System.out.println("Insert name of course you want to drop. Insert 0 to exit");
+            System.out.println("Insert name of course you want to drop or 0 to exit");
             final String ans = reader.readLine();
             if (ans.equals("0")) {
                 return;
@@ -96,23 +97,46 @@ public class StudentUI extends UserUI {
         }
     }
     
-    
-    public void viewCourses() {
-        Set<Courses> studentCourses = ((Student) user).getCourses().keySet();
-        Set<Courses> registeredCourses = Database.getInstance().getCourses().stream()
-                .filter(c -> studentCourses.contains(c))
-                .collect(Collectors.toSet());
+    public void rateTeacher() throws IOException {
+        Vector<Teacher> teachers = Database.getInstance().getTeachers();
+        if (teachers.isEmpty()) {
+            System.out.println("No teachers available to rate.");
+            return;
+        }
 
-        if (registeredCourses.isEmpty()) {
-            System.out.println("No registered courses available.");
-        } else {
-            System.out.println("Registered Courses:");
-            for (Courses course : registeredCourses) {
-                System.out.println(course.toString());
+        System.out.println("Available Teachers:");
+        for (int i = 0; i < teachers.size(); i++) {
+            System.out.println((i + 1) + ". " + teachers.get(i).getLogin());
+        }
+
+        System.out.println("Select the number of the teacher to rate:");
+        int teacherNumber = Integer.parseInt(reader.readLine());
+
+        if (teacherNumber > 0 && teacherNumber <= teachers.size()) {
+            Teacher teacher = teachers.get(teacherNumber - 1);
+            int rating;
+
+            try {
+                System.out.println("Enter your rating for " + teacher.getLogin() + " (out of 10):");
+                rating = Integer.parseInt(reader.readLine());
+
+                if (rating < 0 || rating > 10) {
+                    System.out.println("Invalid rating. Please enter a number between 0 and 10.");
+                    return;
+                }
+
+                // Call the appropriate method to handle rating in the Teacher class
+                Database.getInstance().setTeacherRatings(teacher, rating);
+                
+
+                System.out.println("Rating submitted successfully.");
+            } catch (NumberFormatException nfe) {
+                System.out.println("Invalid input. Please enter a valid number.");
             }
+        } else {
+            System.out.println("Invalid teacher number.");
         }
     }
-
 
     public void main() {
         while (true) {
@@ -120,11 +144,13 @@ public class StudentUI extends UserUI {
                 System.out.println("0. Exit");
                 System.out.println("1. View news");
                 System.out.println("2. Change password");
-                System.out.println("3. View courses");
+                System.out.println("3. View attendance");
                 System.out.println("4. Register to a course");
                 System.out.println("5. Drop course");
                 System.out.println("6. View marks");
                 System.out.println("8. Become a researcher");
+                System.out.println("9. Rate teacher");
+                
                 String ans = reader.readLine();
                 switch (ans) {
                     case "0":
@@ -136,7 +162,7 @@ public class StudentUI extends UserUI {
                         changePassword();
                         break;
                     case "3":
-                    	viewCourses();
+                        viewAttendance();
                         break;
                     case "4":
                         register();
@@ -149,6 +175,9 @@ public class StudentUI extends UserUI {
                         break;
                     case "8":
                         researcherMenu();
+                        break;
+                    case "9":
+                        rateTeacher();
                         break;
                     default:
                         System.out.println("Not found");

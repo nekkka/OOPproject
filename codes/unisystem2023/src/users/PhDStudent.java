@@ -3,6 +3,7 @@ package users;
 import java.util.List;
 
 import enums.UserRole;
+import main.Database;
 import unisystem2023.ResearchPaper;
 
 public class PhDStudent extends Student implements CanBeResearcher {
@@ -31,9 +32,20 @@ public class PhDStudent extends Student implements CanBeResearcher {
         this.works = works;
     }
 
-    public void teachAsPracticant() {
-        // TODO: Implement method for teaching as a practicant
-    }
+   /* public void teachAsPracticant() {
+        PhDStudent currentPhDStudent = 
+        
+        if (currentPhDStudent != null) {
+            Database database = Database.getInstance();
+            currentPhDStudent.setTeachingAsPracticant(true);
+            database.updatePhDStudent(currentPhDStudent);
+            
+            System.out.println("Teaching duties as a practicant performed successfully.");
+        } else {
+            System.out.println("Ph.D. student not found or logged in.");
+        }
+    }*/
+
     
     public String writeDiploma(String topic, String sphere) {
         String diplomaText = "Writing the diploma on the topic '" + topic + "' in the sphere of '" + sphere + "'.";
