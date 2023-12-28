@@ -137,6 +137,23 @@ public class StudentUI extends UserUI {
             System.out.println("Invalid teacher number.");
         }
     }
+    
+    public void viewCourses() {
+        Set<Courses> studentCourses = ((Student) user).getCourses().keySet();
+        Set<Courses> registeredCourses = Database.getInstance().getCourses().stream()
+                .filter(c -> studentCourses.contains(c))
+                .collect(Collectors.toSet());
+
+        if (registeredCourses.isEmpty()) {
+            System.out.println("No registered courses available.");
+        } else {
+            System.out.println("Registered Courses:");
+            for (Courses course : registeredCourses) {
+                System.out.println(course.toString());
+            }
+        }
+    }
+
 
     public void main() {
         while (true) {
@@ -144,7 +161,7 @@ public class StudentUI extends UserUI {
                 System.out.println("0. Exit");
                 System.out.println("1. View news");
                 System.out.println("2. Change password");
-                System.out.println("3. View attendance");
+                System.out.println("3. View courses");
                 System.out.println("4. Register to a course");
                 System.out.println("5. Drop course");
                 System.out.println("6. View marks");
@@ -162,7 +179,7 @@ public class StudentUI extends UserUI {
                         changePassword();
                         break;
                     case "3":
-                        viewAttendance();
+                    	viewCourses();
                         break;
                     case "4":
                         register();

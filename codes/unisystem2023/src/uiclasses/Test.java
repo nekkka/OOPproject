@@ -30,7 +30,6 @@ public class Test {
         if(user instanceof TechSupportSpecialist){
         	consoleUI = new TechSupportUI((TechSupportSpecialist)user);
         }
- 
     }
 
     public static void login(){

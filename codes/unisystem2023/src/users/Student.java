@@ -12,7 +12,7 @@ import main.Database;
 import unisystem2023.Mark;
 
 
-public class Student extends User implements CanBeResearcher, Serializable {
+public class Student extends User implements CanBeResearcher, Serializable, Comparable<User> {
 	
 	private static final long serialVersionUID = 1L;
 	static final UserRole role = UserRole.STUDENT;
@@ -107,11 +107,6 @@ public class Student extends User implements CanBeResearcher, Serializable {
         } else {
             System.out.println("No marks available");
         }
-    }
-
-
-    public void rateTeacher() {
-        // приходите позже, я еще не андерстенд как реализовать
     }
 
 
@@ -212,14 +207,14 @@ public class Student extends User implements CanBeResearcher, Serializable {
     }
     
 
-   // @Override
-    /*public int compareTo(User o) {
+    @Override
+   public int compareTo(User o) {
         if (o instanceof Student) {
             Student otherStudent = (Student) o;
             return Long.compare(this.getId(), otherStudent.getId());
         }
         return 0;
-    }*/
+    }
 
     
     
